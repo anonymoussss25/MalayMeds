@@ -1,0 +1,299 @@
+Disease,Symptom_1,Symptom_2,Symptom_3,Symptom_4,Symptom_5,treatment_id
+Demam Berlat,Sawan,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,1
+Demam Berlat,Sawan,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,1
+Demam Berlat,Sawan,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,1
+Demam Berlat,Kurang selera makan,Sawan,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,1
+Demam Berlat,Kurang selera makan,Sawan,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,1
+Demam Berlat,Kurang selera makan,Sawan,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,1
+Demam Berlat,Pendarahan luar biasa,Kurang selera makan,Sawan,Sukar bernafas,Mata atau mulut kuning,1
+Demam Berlat,Pendarahan luar biasa,Kurang selera makan,Sawan,Sukar bernafas,Mata atau mulut kuning,1
+Demam Berlat,Pendarahan luar biasa,Kurang selera makan,Sawan,Sukar bernafas,Mata atau mulut kuning,1
+Demam Berlat,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,Sawan,Sukar bernafas,1
+Demam Berlat,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,Sawan,Sukar bernafas,1
+Demam Berlat,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,Sawan,Sukar bernafas,1
+Demam Berlat,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,Sawan,1
+Demam Berlat,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,Sawan,1
+Demam Berlat,Sukar bernafas,Mata atau mulut kuning,Pendarahan luar biasa,Kurang selera makan,Sawan,1
+Demam Dingin,Selesema,Menggigil,Sakit kepala,Sakit otot,Lesu,2
+Demam Dingin,Selesema,Menggigil,Sakit kepala,Sakit otot,Lesu,2
+Demam Dingin,Selesema,Menggigil,Sakit kepala,Sakit otot,Lesu,2
+Demam Dingin,Lesu,Selesema,Menggigil,Sakit kepala,Sakit otot,2
+Demam Dingin,Lesu,Selesema,Menggigil,Sakit kepala,Sakit otot,2
+Demam Dingin,Lesu,Selesema,Menggigil,Sakit kepala,Sakit otot,2
+Demam Dingin,Sakit otot,Lesu,Selesema,Menggigil,Sakit kepala,2
+Demam Dingin,Sakit otot,Lesu,Selesema,Menggigil,Sakit kepala,2
+Demam Dingin,Sakit otot,Lesu,Selesema,Menggigil,Sakit kepala,2
+Demam Dingin,Sakit kepala,Sakit otot,Lesu,Selesema,Menggigil,2
+Demam Dingin,Sakit kepala,Sakit otot,Lesu,Selesema,Menggigil,2
+Demam Dingin,Sakit kepala,Sakit otot,Lesu,Selesema,Menggigil,2
+Demam Dingin,Menggigil,Sakit kepala,Sakit otot,Lesu,Selesema,2
+Demam Dingin,Menggigil,Sakit kepala,Sakit otot,Lesu,Selesema,2
+Demam Dingin,Menggigil,Sakit kepala,Sakit otot,Lesu,Selesema,2
+Demam Eropah,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,Ruam,Sakit sendi teruk,3
+Demam Eropah,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,Ruam,Sakit sendi teruk,3
+Demam Eropah,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,Ruam,Sakit sendi teruk,3
+Demam Eropah,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,Ruam,3
+Demam Eropah,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,Ruam,3
+Demam Eropah,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,Ruam,3
+Demam Eropah,Ruam,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,3
+Demam Eropah,Ruam,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,3
+Demam Eropah,Ruam,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,Pendarahan ringan,3
+Demam Eropah,Pendarahan ringan,Ruam,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,3
+Demam Eropah,Pendarahan ringan,Ruam,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,3
+Demam Eropah,Pendarahan ringan,Ruam,Sakit sendi teruk,Sakit di belakang mata,Sakit otot teruk,3
+Demam Eropah,Sakit otot teruk,Pendarahan ringan,Ruam,Sakit sendi teruk,Sakit di belakang mata,3
+Demam Eropah,Sakit otot teruk,Pendarahan ringan,Ruam,Sakit sendi teruk,Sakit di belakang mata,3
+Demam Eropah,Sakit otot teruk,Pendarahan ringan,Ruam,Sakit sendi teruk,Sakit di belakang mata,3
+Demam Kelenjaran ,Ruam,Mata bengkak,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,4
+Demam Kelenjaran ,Ruam,Mata bengkak,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,4
+Demam Kelenjaran ,Ruam,Mata bengkak,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,4
+Demam Kelenjaran ,Mata atau mulut kuning,Ruam,Mata bengkak,Kelenjar bengkak,Sakit badan,4
+Demam Kelenjaran ,Mata atau mulut kuning,Ruam,Mata bengkak,Kelenjar bengkak,Sakit badan,4
+Demam Kelenjaran ,Mata atau mulut kuning,Ruam,Mata bengkak,Kelenjar bengkak,Sakit badan,4
+Demam Kelenjaran ,Sakit badan,Mata atau mulut kuning,Ruam,Mata bengkak,Kelenjar bengkak,4
+Demam Kelenjaran ,Sakit badan,Mata atau mulut kuning,Ruam,Mata bengkak,Kelenjar bengkak,4
+Demam Kelenjaran ,Sakit badan,Mata atau mulut kuning,Ruam,Mata bengkak,Kelenjar bengkak,4
+Demam Kelenjaran ,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,Ruam,Mata bengkak,4
+Demam Kelenjaran ,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,Ruam,Mata bengkak,4
+Demam Kelenjaran ,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,Ruam,Mata bengkak,4
+Demam Kelenjaran ,Mata bengkak,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,Ruam,4
+Demam Kelenjaran ,Mata bengkak,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,Ruam,4
+Demam Kelenjaran ,Mata bengkak,Kelenjar bengkak,Sakit badan,Mata atau mulut kuning,Ruam,4
+Demam Kepialu,Loya,Sakit bahagian perut,Cirit-birit,Ruam,Bintik-bintik merah di badan,5
+Demam Kepialu,Loya,Sakit bahagian perut,Cirit-birit,Ruam,Bintik-bintik merah di badan,5
+Demam Kepialu,Loya,Sakit bahagian perut,Cirit-birit,Ruam,Bintik-bintik merah di badan,5
+Demam Kepialu,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,Cirit-birit,Ruam,5
+Demam Kepialu,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,Cirit-birit,Ruam,5
+Demam Kepialu,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,Cirit-birit,Ruam,5
+Demam Kepialu,Ruam,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,Cirit-birit,5
+Demam Kepialu,Ruam,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,Cirit-birit,5
+Demam Kepialu,Ruam,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,Cirit-birit,5
+Demam Kepialu,Cirit-birit,Ruam,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,5
+Demam Kepialu,Cirit-birit,Ruam,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,5
+Demam Kepialu,Cirit-birit,Ruam,Bintik-bintik merah di badan,Loya,Sakit bahagian perut,5
+Demam Kepialu,Sakit bahagian perut,Cirit-birit,Ruam,Bintik-bintik merah di badan,Loya,5
+Demam Kepialu,Sakit bahagian perut,Cirit-birit,Ruam,Bintik-bintik merah di badan,Loya,5
+Demam Kepialu,Sakit bahagian perut,Cirit-birit,Ruam,Bintik-bintik merah di badan,Loya,5
+Demam Kuning,Sakit kepala,Muntah,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,6
+Demam Kuning,Sakit kepala,Muntah,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,6
+Demam Kuning,Sakit kepala,Muntah,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,6
+Demam Kuning,Sakit bahagian perut,Sakit kepala,Muntah,Mata atau mulut kuning,Air kencing gelap,6
+Demam Kuning,Sakit bahagian perut,Sakit kepala,Muntah,Mata atau mulut kuning,Air kencing gelap,6
+Demam Kuning,Sakit bahagian perut,Sakit kepala,Muntah,Mata atau mulut kuning,Air kencing gelap,6
+Demam Kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,Muntah,Mata atau mulut kuning,6
+Demam Kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,Muntah,Mata atau mulut kuning,6
+Demam Kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,Muntah,Mata atau mulut kuning,6
+Demam Kuning,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,Muntah,6
+Demam Kuning,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,Muntah,6
+Demam Kuning,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,Muntah,6
+Demam Kuning,Muntah,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,6
+Demam Kuning,Muntah,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,6
+Demam Kuning,Muntah,Mata atau mulut kuning,Air kencing gelap,Sakit bahagian perut,Sakit kepala,6
+Demam Kura Dengan Kencing Darah,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,Sakit kepala,Anemia,7
+Demam Kura Dengan Kencing Darah,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,Sakit kepala,Anemia,7
+Demam Kura Dengan Kencing Darah,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,Sakit kepala,Anemia,7
+Demam Kura Dengan Kencing Darah,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,Sakit kepala,7
+Demam Kura Dengan Kencing Darah,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,Sakit kepala,7
+Demam Kura Dengan Kencing Darah,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,Sakit kepala,7
+Demam Kura Dengan Kencing Darah,Sakit kepala,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,7
+Demam Kura Dengan Kencing Darah,Sakit kepala,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,7
+Demam Kura Dengan Kencing Darah,Sakit kepala,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,Kurang selera makan,7
+Demam Kura Dengan Kencing Darah,Kurang selera makan,Sakit kepala,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,7
+Demam Kura Dengan Kencing Darah,Kurang selera makan,Sakit kepala,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,7
+Demam Kura Dengan Kencing Darah,Kurang selera makan,Sakit kepala,Anemia,Air kencing gelap atau berdarah,Mata atau mulut kuning,7
+Demam Kura Dengan Kencing Darah,Mata atau mulut kuning,Kurang selera makan,Sakit kepala,Anemia,Air kencing gelap atau berdarah,7
+Demam Lenguh Sendi Tulang,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,8
+Demam Lenguh Sendi Tulang,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,8
+Demam Lenguh Sendi Tulang,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,8
+Demam Lenguh Sendi Tulang,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,8
+Demam Lenguh Sendi Tulang,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,8
+Demam Lenguh Sendi Tulang,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,8
+Demam Lenguh Sendi Tulang,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,8
+Demam Lenguh Sendi Tulang,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,8
+Demam Lenguh Sendi Tulang,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,Sendi-sendi lembut,8
+Demam Lenguh Sendi Tulang,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,8
+Demam Lenguh Sendi Tulang,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,8
+Demam Lenguh Sendi Tulang,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,Pergerakan tersentak,8
+Demam Lenguh Sendi Tulang,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,8
+Demam Lenguh Sendi Tulang,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,8
+Demam Lenguh Sendi Tulang,Pergerakan tersentak,Sendi-sendi lembut,Sendi-sendi kemerahan,Sendi bengkak,Sendi-sendi panas,8
+Demam Meroyan,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,selulitis,9
+Demam Meroyan,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,selulitis,9
+Demam Meroyan,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,selulitis,9
+Demam Meroyan,selulitis,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,9
+Demam Meroyan,selulitis,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,9
+Demam Meroyan,selulitis,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,9
+Demam Meroyan,Sakit bahagian perut,selulitis,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,9
+Demam Meroyan,Sakit bahagian perut,selulitis,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,9
+Demam Meroyan,Sakit bahagian perut,selulitis,Payudara membesar,Payudara kemerah-merahan,Sakit di pelvis,9
+Demam Meroyan,Sakit di pelvis,Sakit bahagian perut,selulitis,Payudara membesar,Payudara kemerah-merahan,9
+Demam Meroyan,Sakit di pelvis,Sakit bahagian perut,selulitis,Payudara membesar,Payudara kemerah-merahan,9
+Demam Meroyan,Sakit di pelvis,Sakit bahagian perut,selulitis,Payudara membesar,Payudara kemerah-merahan,9
+Demam Meroyan,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,selulitis,Payudara membesar,9
+Demam Meroyan,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,selulitis,Payudara membesar,9
+Demam Meroyan,Payudara kemerah-merahan,Sakit di pelvis,Sakit bahagian perut,selulitis,Payudara membesar,9
+Demam Panas,Sakit kepala,Loya,Muntah,Kulit kemerah-merahan,kulit kering,10
+Demam Panas,Sakit kepala,Loya,Muntah,Kulit kemerah-merahan,kulit kering,10
+Demam Panas,Sakit kepala,Loya,Muntah,Kulit kemerah-merahan,kulit kering,10
+Demam Panas,kulit kering,Sakit kepala,Loya,Muntah,Kulit kemerah-merahan,10
+Demam Panas,kulit kering,Sakit kepala,Loya,Muntah,Kulit kemerah-merahan,10
+Demam Panas,kulit kering,Sakit kepala,Loya,Muntah,Kulit kemerah-merahan,10
+Demam Panas,Kulit kemerah-merahan,kulit kering,Sakit kepala,Loya,Muntah,10
+Demam Panas,Kulit kemerah-merahan,kulit kering,Sakit kepala,Loya,Muntah,10
+Demam Panas,Kulit kemerah-merahan,kulit kering,Sakit kepala,Loya,Muntah,10
+Demam Panas,Muntah,Kulit kemerah-merahan,kulit kering,Sakit kepala,Loya,10
+Demam Panas,Muntah,Kulit kemerah-merahan,kulit kering,Sakit kepala,Loya,10
+Demam Panas,Muntah,Kulit kemerah-merahan,kulit kering,Sakit kepala,Loya,10
+Demam Panas,Loya,Muntah,Kulit kemerah-merahan,kulit kering,Sakit kepala,10
+Demam Panas,Loya,Muntah,Kulit kemerah-merahan,kulit kering,Sakit kepala,10
+Demam Panas,Loya,Muntah,Kulit kemerah-merahan,kulit kering,Sakit kepala,10
+Demam Pelih,Loya,Sakit sendi,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,11
+Demam Pelih,Loya,Sakit sendi,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,11
+Demam Pelih,Loya,Sakit sendi,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,11
+Demam Pelih,Kurang selera makan,Loya,Sakit sendi,Air kencing gelap,Najis berwarna cerah,11
+Demam Pelih,Kurang selera makan,Loya,Sakit sendi,Air kencing gelap,Najis berwarna cerah,11
+Demam Pelih,Kurang selera makan,Loya,Sakit sendi,Air kencing gelap,Najis berwarna cerah,11
+Demam Pelih,Najis berwarna cerah,Kurang selera makan,Loya,Sakit sendi,Air kencing gelap,11
+Demam Pelih,Najis berwarna cerah,Kurang selera makan,Loya,Sakit sendi,Air kencing gelap,11
+Demam Pelih,Najis berwarna cerah,Kurang selera makan,Loya,Sakit sendi,Air kencing gelap,11
+Demam Pelih,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,Loya,Sakit sendi,11
+Demam Pelih,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,Loya,Sakit sendi,11
+Demam Pelih,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,Loya,Sakit sendi,11
+Demam Pelih,Sakit sendi,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,Loya,11
+Demam Pelih,Sakit sendi,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,Loya,11
+Demam Pelih,Sakit sendi,Air kencing gelap,Najis berwarna cerah,Kurang selera makan,Loya,11
+Demam Rabu-Rabu Kembang,Sakit dada,Loya,Batuk berkahak,Lesu,Sesak nafas,12
+Demam Rabu-Rabu Kembang,Sakit dada,Loya,Batuk berkahak,Lesu,Sesak nafas,12
+Demam Rabu-Rabu Kembang,Sakit dada,Loya,Batuk berkahak,Lesu,Sesak nafas,12
+Demam Rabu-Rabu Kembang,Sesak nafas,Sakit dada,Loya,Batuk berkahak,Lesu,12
+Demam Rabu-Rabu Kembang,Sesak nafas,Sakit dada,Loya,Batuk berkahak,Lesu,12
+Demam Rabu-Rabu Kembang,Sesak nafas,Sakit dada,Loya,Batuk berkahak,Lesu,12
+Demam Rabu-Rabu Kembang,Lesu,Sesak nafas,Sakit dada,Loya,Batuk berkahak,12
+Demam Rabu-Rabu Kembang,Lesu,Sesak nafas,Sakit dada,Loya,Batuk berkahak,12
+Demam Rabu-Rabu Kembang,Lesu,Sesak nafas,Sakit dada,Loya,Batuk berkahak,12
+Demam Rabu-Rabu Kembang,Batuk berkahak,Lesu,Sesak nafas,Sakit dada,Loya,12
+Demam Rabu-Rabu Kembang,Batuk berkahak,Lesu,Sesak nafas,Sakit dada,Loya,12
+Demam Rabu-Rabu Kembang,Batuk berkahak,Lesu,Sesak nafas,Sakit dada,Loya,12
+Demam Rabu-Rabu Kembang,Loya,Batuk berkahak,Lesu,Sesak nafas,Sakit dada,12
+Demam Rabu-Rabu Kembang,Loya,Batuk berkahak,Lesu,Sesak nafas,Sakit dada,12
+Demam Rabu-Rabu Kembang,Loya,Batuk berkahak,Lesu,Sesak nafas,Sakit dada,12
+Demam Sehari-hari,Sakit kepala,Sakit otot,Kurang selera makan,Dehidrasi,Lesu,13
+Demam Sehari-hari,Sakit kepala,Sakit otot,Kurang selera makan,Dehidrasi,Lesu,13
+Demam Sehari-hari,Sakit kepala,Sakit otot,Kurang selera makan,Dehidrasi,Lesu,13
+Demam Sehari-hari,Lesu,Sakit kepala,Sakit otot,Kurang selera makan,Dehidrasi,13
+Demam Sehari-hari,Lesu,Sakit kepala,Sakit otot,Kurang selera makan,Dehidrasi,13
+Demam Sehari-hari,Lesu,Sakit kepala,Sakit otot,Kurang selera makan,Dehidrasi,13
+Demam Sehari-hari,Dehidrasi,Lesu,Sakit kepala,Sakit otot,Kurang selera makan,13
+Demam Sehari-hari,Dehidrasi,Lesu,Sakit kepala,Sakit otot,Kurang selera makan,13
+Demam Sehari-hari,Dehidrasi,Lesu,Sakit kepala,Sakit otot,Kurang selera makan,13
+Demam Sehari-hari,Kurang selera makan,Dehidrasi,Lesu,Sakit kepala,Sakit otot,13
+Demam Sehari-hari,Kurang selera makan,Dehidrasi,Lesu,Sakit kepala,Sakit otot,13
+Demam Sehari-hari,Kurang selera makan,Dehidrasi,Lesu,Sakit kepala,Sakit otot,13
+Demam Sehari-hari,Sakit otot,Kurang selera makan,Dehidrasi,Lesu,Sakit kepala,13
+Demam Sehari-hari,Sakit otot,Kurang selera makan,Dehidrasi,Lesu,Sakit kepala,13
+Demam Sehari-hari,Sakit otot,Kurang selera makan,Dehidrasi,Lesu,Sakit kepala,13
+Demam Sampu,Sakit gusi ringan,Muntah,Cirit-birit,Ruam meluas,Menangis berlebihan,14
+Demam Sampu,Sakit gusi ringan,Muntah,Cirit-birit,Ruam meluas,Menangis berlebihan,14
+Demam Sampu,Sakit gusi ringan,Muntah,Cirit-birit,Ruam meluas,Menangis berlebihan,14
+Demam Sampu,Menangis berlebihan,Sakit gusi ringan,Muntah,Cirit-birit,Ruam meluas,14
+Demam Sampu,Menangis berlebihan,Sakit gusi ringan,Muntah,Cirit-birit,Ruam meluas,14
+Demam Sampu,Menangis berlebihan,Sakit gusi ringan,Muntah,Cirit-birit,Ruam meluas,14
+Demam Sampu,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,Muntah,Cirit-birit,14
+Demam Sampu,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,Muntah,Cirit-birit,14
+Demam Sampu,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,Muntah,Cirit-birit,14
+Demam Sampu,Cirit-birit,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,Muntah,14
+Demam Sampu,Cirit-birit,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,Muntah,14
+Demam Sampu,Cirit-birit,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,Muntah,14
+Demam Sampu,Muntah,Cirit-birit,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,14
+Demam Sampu,Muntah,Cirit-birit,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,14
+Demam Sampu,Muntah,Cirit-birit,Ruam meluas,Menangis berlebihan,Sakit gusi ringan,14
+Demam Sampu Tahun,Batuk berdarah,Batuk berkahak,Sakit dada,Berpeluh malam,Berat badan turun,15
+Demam Sampu Tahun,Batuk berdarah,Batuk berkahak,Sakit dada,Berpeluh malam,Berat badan turun,15
+Demam Sampu Tahun,Batuk berdarah,Batuk berkahak,Sakit dada,Berpeluh malam,Berat badan turun,15
+Demam Sampu Tahun,Berat badan turun,Batuk berdarah,Batuk berkahak,Sakit dada,Berpeluh malam,15
+Demam Sampu Tahun,Berat badan turun,Batuk berdarah,Batuk berkahak,Sakit dada,Berpeluh malam,15
+Demam Sampu Tahun,Berat badan turun,Batuk berdarah,Batuk berkahak,Sakit dada,Berpeluh malam,15
+Demam Sampu Tahun,Berpeluh malam,Berat badan turun,Batuk berdarah,Batuk berkahak,Sakit dada,15
+Demam Sampu Tahun,Berpeluh malam,Berat badan turun,Batuk berdarah,Batuk berkahak,Sakit dada,15
+Demam Sampu Tahun,Berpeluh malam,Berat badan turun,Batuk berdarah,Batuk berkahak,Sakit dada,15
+Demam Sampu Tahun,Sakit dada,Berpeluh malam,Berat badan turun,Batuk berdarah,Batuk berkahak,15
+Demam Sampu Tahun,Sakit dada,Berpeluh malam,Berat badan turun,Batuk berdarah,Batuk berkahak,15
+Demam Sampu Tahun,Sakit dada,Berpeluh malam,Berat badan turun,Batuk berdarah,Batuk berkahak,15
+Demam Sampu Tahun,Batuk berkahak,Sakit dada,Berpeluh malam,Berat badan turun,Batuk berdarah,15
+Demam Sampu Tahun,Batuk berkahak,Sakit dada,Berpeluh malam,Berat badan turun,Batuk berdarah,15
+Demam Sampu Tahun,Batuk berkahak,Sakit dada,Berpeluh malam,Berat badan turun,Batuk berdarah,15
+Demam Selesema,batuk kering,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,16
+Demam Selesema,batuk kering,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,16
+Demam Selesema,batuk kering,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,16
+Demam Selesema,Sakit tekak,batuk kering,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,16
+Demam Selesema,Sakit tekak,batuk kering,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,16
+Demam Selesema,Sakit tekak,batuk kering,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,16
+Demam Selesema,Hidung berair dan tersumbat,Sakit tekak,batuk kering,Batuk berterusan,Sesak nafas,16
+Demam Selesema,Hidung berair dan tersumbat,Sakit tekak,batuk kering,Batuk berterusan,Sesak nafas,16
+Demam Selesema,Hidung berair dan tersumbat,Sakit tekak,batuk kering,Batuk berterusan,Sesak nafas,16
+Demam Selesema,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,batuk kering,Batuk berterusan,16
+Demam Selesema,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,batuk kering,Batuk berterusan,16
+Demam Selesema,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,batuk kering,Batuk berterusan,16
+Demam Selesema,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,batuk kering,16
+Demam Selesema,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,batuk kering,16
+Demam Selesema,Batuk berterusan,Sesak nafas,Hidung berair dan tersumbat,Sakit tekak,batuk kering,16
+Demam Susu,Payudara bengkak,Kulit kemerah-merahan,Malaise,Payudara panas,Payudara sakit,17
+Demam Susu,Payudara bengkak,Kulit kemerah-merahan,Malaise,Payudara panas,Payudara sakit,17
+Demam Susu,Payudara bengkak,Kulit kemerah-merahan,Malaise,Payudara panas,Payudara sakit,17
+Demam Susu,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,Malaise,Payudara panas,17
+Demam Susu,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,Malaise,Payudara panas,17
+Demam Susu,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,Malaise,Payudara panas,17
+Demam Susu,Payudara panas,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,Malaise,17
+Demam Susu,Payudara panas,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,Malaise,17
+Demam Susu,Payudara panas,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,Malaise,17
+Demam Susu,Malaise,Payudara panas,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,17
+Demam Susu,Malaise,Payudara panas,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,17
+Demam Susu,Malaise,Payudara panas,Payudara sakit,Payudara bengkak,Kulit kemerah-merahan,17
+Demam Susu,Kulit kemerah-merahan,Malaise,Payudara panas,Payudara sakit,Payudara bengkak,17
+Demam Susu,Kulit kemerah-merahan,Malaise,Payudara panas,Payudara sakit,Payudara bengkak,17
+Demam Susu,Kulit kemerah-merahan,Malaise,Payudara panas,Payudara sakit,Payudara bengkak,17
+Demam Ketulangan,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,18
+Demam Ketulangan,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,18
+Demam Ketulangan,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,18
+Demam Ketulangan,Sakit kepala,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,18
+Demam Ketulangan,Sakit kepala,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,18
+Demam Ketulangan,Sakit kepala,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,18
+Demam Ketulangan,Sesak nafas,Sakit kepala,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,18
+Demam Ketulangan,Sesak nafas,Sakit kepala,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,18
+Demam Ketulangan,Sesak nafas,Sakit kepala,Sakit sendi,Pergerakan tersentak,Ruam berbentuk cincin,18
+Demam Ketulangan,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,Sakit sendi,Pergerakan tersentak,18
+Demam Ketulangan,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,Sakit sendi,Pergerakan tersentak,18
+Demam Ketulangan,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,Sakit sendi,Pergerakan tersentak,18
+Demam Ketulangan,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,Sakit sendi,18
+Demam Ketulangan,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,Sakit sendi,18
+Demam Ketulangan,Pergerakan tersentak,Ruam berbentuk cincin,Sesak nafas,Sakit kepala,Sakit sendi,18
+Demam Kura,Malaise,Loya,Cirit-birit,Sakit bahagian perut,Sakit sendi,19
+Demam Kura,Malaise,Loya,Cirit-birit,Sakit bahagian perut,Sakit sendi,19
+Demam Kura,Malaise,Loya,Cirit-birit,Sakit bahagian perut,Sakit sendi,19
+Demam Kura,Sakit sendi,Malaise,Loya,Cirit-birit,Sakit bahagian perut,19
+Demam Kura,Sakit sendi,Malaise,Loya,Cirit-birit,Sakit bahagian perut,19
+Demam Kura,Sakit sendi,Malaise,Loya,Cirit-birit,Sakit bahagian perut,19
+Demam Kura,Sakit bahagian perut,Sakit sendi,Malaise,Loya,Cirit-birit,19
+Demam Kura,Sakit bahagian perut,Sakit sendi,Malaise,Loya,Cirit-birit,19
+Demam Kura,Sakit bahagian perut,Sakit sendi,Malaise,Loya,Cirit-birit,19
+Demam Kura,Cirit-birit,Sakit bahagian perut,Sakit sendi,Malaise,Loya,19
+Demam Kura,Cirit-birit,Sakit bahagian perut,Sakit sendi,Malaise,Loya,19
+Demam Kura,Cirit-birit,Sakit bahagian perut,Sakit sendi,Malaise,Loya,19
+Demam Kura,Loya,Cirit-birit,Sakit bahagian perut,Sakit sendi,Malaise,19
+Demam Kura,Loya,Cirit-birit,Sakit bahagian perut,Sakit sendi,Malaise,19
+Demam Kura,Loya,Cirit-birit,Sakit bahagian perut,Sakit sendi,Malaise,19
+Demam Kura Menanun,Lesu,Jangkitan salur pernafasan,Perut terasa berat,Anemia,Jangkitan kulit,20
+Demam Kura Menanun,Lesu,Jangkitan salur pernafasan,Perut terasa berat,Anemia,Jangkitan kulit,20
+Demam Kura Menanun,Lesu,Jangkitan salur pernafasan,Perut terasa berat,Anemia,Jangkitan kulit,20
+Demam Kura Menanun,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,Perut terasa berat,Anemia,20
+Demam Kura Menanun,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,Perut terasa berat,Anemia,20
+Demam Kura Menanun,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,Perut terasa berat,Anemia,20
+Demam Kura Menanun,Anemia,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,Perut terasa berat,20
+Demam Kura Menanun,Anemia,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,Perut terasa berat,20
+Demam Kura Menanun,Anemia,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,Perut terasa berat,20
+Demam Kura Menanun,Perut terasa berat,Anemia,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,20
+Demam Kura Menanun,Perut terasa berat,Anemia,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,20
+Demam Kura Menanun,Perut terasa berat,Anemia,Jangkitan kulit,Lesu,Jangkitan salur pernafasan,20
+Demam Kura Menanun,Jangkitan salur pernafasan,Perut terasa berat,Anemia,Jangkitan kulit,Lesu,20
+Demam Kura Menanun,Jangkitan salur pernafasan,Perut terasa berat,Anemia,Jangkitan kulit,Lesu,20
+Demam Kura Menanun,Jangkitan salur pernafasan,Perut terasa berat,Anemia,Jangkitan kulit,Lesu,20

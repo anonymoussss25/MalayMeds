@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalayMeds</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <!-- ---------------------- NAVIGATION BAR --------------------- -->
+    <header class="main-header">
+        <a href="{{ url_for('dashboard') }}" class="logo">
+            <span class="logo-icon"><ion-icon name="fitness"></ion-icon></span>
+            <span class="logo-text">MalayMeds</span>
+        </a>
+        <div class="group">
+            <ul class="navigation">
+                <li><a href="{{ url_for('dashboard') }}">Utama</a></li>
+                <li><a href="{{ url_for('diagnoseme_page') }}">Diagnos Saya</a></li>
+                <li>
+                    <a href="#">Glosari</a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url_for('searchherbs_page') }}">Cari Herba</a></li>
+                        <li><a href="{{ url_for('searchmethods_page') }}">Cari Kaedah</a></li>
+                        <li><a href="{{ url_for('searchfever_page') }}">Cari Demam</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="search">
+                <span class="icon">
+                    <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                    <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+                    <a href="{{ url_for('logout') }}"><ion-icon name="person-circle-outline" class="userBtn" style="color: #001f52dd;"></ion-icon></a>
+                </span>
+            </div>
+            <ion-icon name="menu-outline" class="menuToggle"></ion-icon>
+        </div>
+        <div class="searchBox">
+            <input type="text" placeholder="Search here">
+        </div>
+    </header>
+
+    <!-- --------------- HOME SECTION-DIAGNOSE ME --------------- -->
+    <section class="home" id="home">
+        <div class="image">
+            <img src="{{ url_for('static', filename='img/doctors.svg') }}" alt="">
+        </div>
+
+        <div class="content">
+            <h3>Diagnos Saya</h3>
+            <!-- <p>Diagnose your ailment for a quick, accurate fever insights. Discover Malay Traditional Medicine treatments 
+                tailored to your symptoms, prioritizing your well-being. Your health, our priority.</p> -->
+                <p>Diagnosis Penyakit Anda Untuk Diagnos Demam yang Pantas dan Tepat. Terokai Rawatan Perubatan Tradisional Melayu 
+                    Disesuaikan Dengan Gejala Anda, Mengutamakan Kesejahteraan Anda. Kesihatan Anda, Keutamaan Kami.</p>
+            <a href="{{ url_for('diagnoseme_page') }}" class="bttn">Diagnos Sekarang!<span class="fas fa-chevron-right"></span></a>
+        </div>
+    </section>
+
+    <!-- --------------- HOME SECTION-OUR SERVICES --------------- -->
+    <section class="services" id="services">
+        <h1 class="heading"> servis <span>kami</span> </h1>
+        <div class="box-container">
+            <div class="box">
+                <i class="fas fa-notes-medical"></i>
+                <h3>Diagnosis Percuma</h3>
+                <!-- <p>Get online check up without additional fees.</p> -->
+                <p>Dapatkan pemeriksaan di atas talian tanpa sebarang bayaran.</p>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-x-ray"></i>
+                <h3>Rawatan Visual</h3>
+                <!-- <p>Experience visualized medicine recommendation upon your fever diagnosis!</p> -->
+                <p>Dapatkan cadangan ubat visual selepas demam anda didiagnos!</p>
+            </div>
+            
+            <div class="box">
+                <i class="fas fa-search"></i>
+                <h3>Carian Ubat</h3>
+                <!-- <p>Fill the gaps of your curiosities about Malay Traditional Medicine.</p> -->
+                <p>Tambah pengetahuan anda mengenai Perubatan Tradisional Melayu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ------------------------- HOME SECTION-TENTANG KAMI ---------------------- -->
+    <section class="about" id="about">
+        <h1 class="heading"> <span>Tentang </span> kami </h1>
+        <div class="row">
+            <div class="image">
+                <img src="{{ url_for('static', filename='img/onlinedoctor.svg') }}" alt="">
+            </div>
+
+            <div class="content">
+                <h3>MalayMeds</h3>
+                <!-- <p>Introducing the MalayMeds Diagnose Me feature – your trusted companion on the journey to better health. Our innovative 
+                    tool is designed to help you understand your symptoms, providing valuable treatments using Malay Traditional Mediicne and information about potential health conditions.</p> -->
+                    <p>Memperkenalkan Ciri MalayMeds Diagnose Me – Rakan Yang Dipercayai Anda Dalam Perjalanan Menuju Kesihatan Yang Lebih Baik. Alat Inovatif Kami 
+                        Direka Untuk Membantu Anda Memahami Gejala Anda, Menyediakan Rawatan Berharga Menggunakan Perubatan Tradisional Melayu Dan Maklumat Mengenai 
+                        Keadaan Kesihatan Yang Berpotensi.</p>
+                <!-- <p>Empower yourself with knowledge, make informed decisions, and take control of your wellness. MalayMeds is here to support you every step of the way.</p> -->
+                <p>Perkasakan diri anda dengan pengetahuan, buat keputusan termaklum dan kawal kesihatan anda. MalayMeds sedia menyokong anda setiap langkah.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ------------------------- HOME SECTION-PAKAR KAMI ---------------------- -->
+    <section class="malay" id="malay">
+        <h1 class="heading">Pakar <span>Kami </span></h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/usericon5.png') }}" >
+                </div> 
+                <div class="content">
+                    <h3>En. Zamre Abu Hassan</h3>
+                    <p>En. Zamre Abu Hassan merupakan pakar kami daripada Akademi Pengajian Melayu. Beliau merupakan seorang 
+                        pensyarah daripada Jabatan Sosio Budaya-Kesenian Melayu, APM yang menumpukan kajian kepada masyarakat 
+                        dan budaya melayu yang merangkumi pengajian perubatan dan kesihatan. Encik Zamre berkemahiran khusus dalam pengajian Perubatan Tradisional Melayu</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/usericon5.png') }}" >
+                </div>
+                <div class="content">
+                    <h3>Dr. Siti Nooraina binti Abdul Samad</h3>
+                    <p>Dr Siti Nooraina binti Abdul Samad merupakan seorang pegawai perubatan yang bekerja di Klinik Kesihatan Batu Indah,Johor Bharu. 
+                        Beliau merupakan seorang doktor am dan merupakan graduan Universiti Malaya yang mempunyai pengalaman selama 7 tahun. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ------------------------- HOME SECTION-WORK PROCESS ---------------------- -->
+    <section class="work" id="work">
+        <h1 class="heading">proses <span>kerja</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/formsmall.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <!-- <h3>Fill in Form</h3> -->
+                    <h3>Isi Borang</h3>
+                    <!-- <p>Take a moment to fill out this form to help us better understand your symptoms and provide you with the most accurate assistance. Your detailed information ensures a more precise evaluation.</p> -->
+                    <p>Luangkan sedikit masa untuk mengisi borang ini untuk membantu kami memahami gejala anda 
+                        dengan lebih baik dan memberi anda bantuan yang paling tepat. Maklumat terperinci anda memastikan penilaian yang lebih tepat</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/stetsmall.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <!-- <h3>Symptom Processing</h3> -->
+                    <h3>Proses Simptom</h3>
+                    <!-- <p>Our advanced system is designed to analyze and interpret your symptoms with precision. It's a seamless way to ensure you receive the most accurate guidance and treatment recommendations for your condition.</p> -->
+                    <p>Sistem maju kami direka untuk menganalisis dan mentafsir gejala anda dengan tepat. Ia adalah cara yang lancar untuk memastikan anda menerima panduan dan cadangan rawatan yang paling tepat untuk keadaan anda.</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/basilsmall.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h3>Cadangan Ubat</h3>
+                    <p>Alami kebijaksanaan Perubatan Tradisional Melayu apabila mengisi borang interaktif kami. Gejala unik anda 
+                        membimbing sistem kami untuk mengesyorkan rawatan yang diperibadikan, berakar umbi dalam pengetahuan penyembuhan 
+                        tradisional selama berabad-abad. Kesihatan anda, keutamaan kami.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ------------------------- HOME SECTION - MALAY TRADITIONAL MEDICINE ---------------------- -->
+    <section class="malay" id="malay">
+        <h1 class="heading">Perubatan <span>Tradisional Melayu </span></h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/fever.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h3>Demam dalam perubatan melayu</h3>
+                    <p>Ketahui lebih lanjut tentang demam yang terdapat dalam Perubatan Tradisional Melayu.</p>
+                    <a href="{{ url_for('searchfever_page') }}" class="bttn">  Terokai <span class="fas fa-chevron-right"></span></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/centellasmall.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h3>Herba dalam perubatan melayu</h3>
+                    <p>Ketahui lebih lanjut tentang herba yang digunakan dalam Perubatan Tradisional Melayu</p>
+                    <a href="{{ url_for('searchherbs_page') }}" class="bttn">  Terokai <span class="fas fa-chevron-right"></span></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/mortarpestle.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h3>kaedah rawatan dalam perubatan melayu</h3>
+                    <p>Ketahui lebih lanjut tentang kaedah rawatan yang digunakan dalam Perubatan Tradisional Melayu</p>
+                    <a href="{{ url_for('searchmethods_page') }}" class="bttn">  Terokai <span class="fas fa-chevron-right"></span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ------------------------- HOME SECTION - FOOTER ---------------------- -->
+    <section class="footer">
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Hubungi Kami</h3>
+                <a href="#"><i class="fas fa-phone"></i> +603-7967 7200</a>
+                <a href="https://apm.um.edu.my/"><i class="fas fa-school"></i> Akademi Pengajian Melayu</a>
+                <a href="https://mail.google.com"><i class="fas fa-envelope"></i> apm@um.edu.my </a>
+            </div>
+
+            <div class="box">
+                <h3>Latar Belakang</h3>
+                <a href="https://apm.um.edu.my/sejarah-apm"><i class="fas fa-chevron-right"></i> Akademi Pengajian Melayu</a>
+                <a href="#"><i class="fas fa-chevron-right"></i> MalayMeds</a>
+                <a href="https://www.um.edu.my/"><i class="fas fa-chevron-right"></i> Universiti Malaya</a>
+            </div>
+        </div>
+
+        <div class="credit">Akademi Pengajian Melayu</div>
+    </section>
+
+    <!-- --------------- IMPORT IONICONS --------------- -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+    <!-- --------------- JS SCRIPT --------------- -->
+    <script type="text/javascript" src="{{ url_for('static', filename='script/script.js') }}"></script>
+
+</html>

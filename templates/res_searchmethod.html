@@ -1,0 +1,24 @@
+{% if meth %}
+    <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Definisi</th>
+                <th>Tindakan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in meth %}  
+                <tr class="method-row" data-method-id="{{ row.method_id }}">
+                    <td>{{ row.method_name }}</td>
+                    <td>{{ row.method_def }}</td>
+                    <td>
+                        <a href="{{ url_for('methodinformation_page', method_id=row.method_id) }}" class="btn btn-primary btn-lg">Lihat</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="font-weight: 600; font-size: 16px; padding-top: 10px; color: red;">Tiada maklumat.</p>
+{% endif %}

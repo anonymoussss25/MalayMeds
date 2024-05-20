@@ -1,0 +1,27 @@
+{% if fever %}
+    <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Nama Saintifik</th>
+                <th>Definisi</th>
+                <th>Tindakan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in fever %}  
+                <tr class="fever-row" data-fever-id="{{ row.fever_id }}">
+                    <td>{{ row.fever_name }}</td>
+                    <td>{{ row.fever_scname }}</td>
+                    <td>{{ row.fever_def }}</td>
+                    <td>
+                        <a href="{{ url_for('feverinformation_page', fever_id=row.fever_id) }}" class="btn btn-primary btn-lg">Lihat</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="font-weight: 600; font-size: 16px; padding-top: 10px; color: red;">Tiada maklumat.</p>
+{% endif %}
+

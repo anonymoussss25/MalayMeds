@@ -1,0 +1,28 @@
+{% if herb %}
+    <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Nama Saintifik</th>
+                <th>Penerangan</th>
+                <th>Bahagian Digunakan</th>
+                <th>Tindakan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in herb %}
+                <tr class="herb-row" data-herb-id="{{ row.herbs_id }}">
+                    <td>{{ row.herbs_name }}</td>
+                    <td>{{ row.herbs_scname }}</td>
+                    <td>{{ row.herbs_desc }}</td>
+                    <td>{{ row.herbs_parts }}</td>
+                    <td>
+                        <a href="{{ url_for('herbinformation_page', herb_id=row.herbs_id) }}" class="btn btn-primary btn-lg">Lihat</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="font-weight: 600; font-size: 16px; padding-top: 10px; color: red;">Tiada maklumat.</p>
+{% endif %}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginform_css/fonts/icomoon/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginform_css/css/owl.carousel.min.css') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginform_css/css/bootstrap.min.css') }}">
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginform_css/css/style.css') }}">
+    <title>MalayMeds</title>
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 order-md-2">
+                    <img src="{{ url_for('static', filename='img/doctors-animate (4).svg') }}" style="padding-bottom: 200px;" alt="Image" >
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3 style="font-size: 26px;">Daftar Akaun <strong>MalayMeds</strong></h3>
+                                <!-- <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p> -->
+                            </div>
+
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                        {% for category, message in messages %}
+                                            <p class="flash-{{ category }}" style="font-size: 13px; color: red;">{{ message }}</p>
+                                        {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+
+                            <form action="/register" method="POST">
+                                <div class="form-group last mb-4">
+                                    <label for="username"></label>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Nama Pengguna" style="font-size: 12px; color: gray;" required>
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label for="email"></label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="E-mel" style="font-size: 12px; color: gray;" required>
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label for="password"></label>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Kata Laluan" style="font-size: 12px; color: gray;" required>
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label for="password"></label>
+                                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Sahkan kata laluan anda" style="font-size: 12px; color: gray;" required>
+                                </div>
+
+                                <!-- <style>
+                                    .custom-dropdown {
+                                        border: 1px solid #ced4da;
+                                        border-radius: 4px;
+                                        padding: 8px;
+                                        background-color: #ffffff;
+                                    }
+                                </style> -->
+
+                                <div class="custom-dropdown" style="margin-bottom: 15px;">
+                                    <select id="role" name="role" class="form-select"  required>
+                                        <option value="admin">Admin</option>
+                                        <option value="user">Pengguna</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-flex mb-5 align-items-center">
+                                    <span><a href="{{ url_for('login') }}" class="forgot-pass">Mempunyai Akaun? Log Masuk</a></span> 
+                                </div>
+                                <input type="submit" value="Daftar" class="btn text-white btn-block btn-primary" style="background-color: #001f52dd;">
+                            </form>
+                        </div>
+                    </div>
+          
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

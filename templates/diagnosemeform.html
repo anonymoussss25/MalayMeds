@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalayMeds</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+</head>
+<body>
+
+    <!-- ---------------------- NAVIGATION BAR --------------------- -->
+    <header class="main-header">
+        <a href="{{ url_for('dashboard') }}" class="logo">
+            <span class="logo-icon"><ion-icon name="fitness"></ion-icon></span>
+            <span class="logo-text">MalayMeds</span>
+        </a>
+        <div class="group">
+            <ul class="navigation">
+                <li><a href="{{ url_for('dashboard') }}">Utama</a></li>
+                <li><a href="{{ url_for('diagnoseme_page') }}">Diagnos Saya</a></li>
+                <li>
+                    <a href="#">Glosari</a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url_for('searchherbs_page') }}">Cari Herba</a></li>
+                        <li><a href="{{ url_for('searchmethods_page') }}">Cari Kaedah</a></li>
+                        <li><a href="{{ url_for('searchfever_page') }}">Cari Demam</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="search">
+                <span class="icon">
+                    <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                    <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+                    <a href="{{ url_for('logout') }}"><ion-icon name="person-circle-outline" class="userBtn" style="color: #001f52dd;"></ion-icon></a>
+                </span>
+            </div>
+            <ion-icon name="menu-outline" class="menuToggle"></ion-icon>
+        </div>
+        <div class="searchBox">
+            <input type="text" placeholder="Search here">
+        </div>
+    </header>
+
+    <!-- ------------------------- DIAGNOSE ME PAGE - DIAGNOSE ME ---------------------- -->
+    <section class="diagnose" id="diagnose">
+        <h1 class="page-heading"> diagnos <span> saya </span> </h1>
+
+        <!-- try -->
+        <div class="container my-5">
+            <p style="color: #6e6c6c; font-weight: 450; font-size: 15px;">Sila isi semua 5 simptom berikut untuk memastikan keputusan diagnosis yang tepat.</p>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="container">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="background-color: rgba(252, 3, 3, 0.171); width: 100%; color: rgba(0, 0, 0, 0.833); border-color: darkred; font-size: 12px;">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <div class="container-fluid">
+                <form class="form-group row" action="/diagnoseme" method="POST">
+                    <label for="Symptom_1" style="margin-bottom: 10px;">Simptom 1: </label> <br>
+                    <select id="Symptom_1" name="Symptom_1" class="form-control form-control-lg select2" required>
+                        <option selected>Pilih Simptom</option>
+                        <option value="0">Air kencing gelap</option>
+                        <option value="1">Air kencing gelap atau berdarah</option>
+                        <option value="2">Anemia</option>
+                        <option value="3">Batuk berdarah</option>
+                        <option value="4">Batuk berkahak</option>
+                        <option value="5">batuk berterusan</option>
+                        <option value="6">batuk kering</option>
+                        <option value="7">berat badan turun</option>
+                        <option value="8">Berpeluh malam</option>
+                        <option value="9">Bintik-bintik merah di badan</option>
+                        <option value="10">Cirit-birit</option>
+                        <option value="11">Dehidrasi</option>
+                        <option value="12">hidung berair dan tersumbat</option>
+                        <option value="13">Jangkitan kulit</option>
+                        <option value="14">Jangkitan salur pernafasan</option>
+                        <option value="15">Kelenjar bengkak</option>
+                        <option value="16">Kulit kemerah-merahan</option>
+                        <option value="17">kulit kering</option>
+                        <option value="18">Kurang selera makan</option>
+                        <option value="19">Lesu</option>
+                        <option value="20">Loya</option>
+                        <option value="21">Malaise</option>
+                        <option value="22">Mata atau mulut kuning</option>
+                        <option value="23">Mata bengkak</option>
+                        <option value="24">Menangis berlebihan</option>
+                        <option value="25">Menggigil</option>
+                        <option value="26">Muntah</option>
+                        <option value="27">Najis berwarna cerah</option>
+                        <option value="28">Payudara bengkak</option>
+                        <option value="29">Payudara kemerah-merahan</option>
+                        <option value="30">Payudara membesar</option>
+                        <option value="31">Payudara panas</option>
+                        <option value="32">Payudara sakit</option>
+                        <option value="33">Pendarahan luar biasa</option>
+                        <option value="34">Pendarahan ringan</option>
+                        <option value="35">Pergerakan tersentak</option>
+                        <option value="36">Perut terasa berat</option>
+                        <option value="37">Ruam</option>
+                        <option value="38">Ruam berbentuk cincin</option>
+                        <option value="39">Ruam meluas</option>
+                        <option value="40">Sakit badan</option>
+                        <option value="41">Sakit bahagian perut</option>
+                        <option value="42">sakit dada</option>
+                        <option value="43">Sakit di belakang mata</option>
+                        <option value="44">Sakit di pelvis</option>
+                        <option value="45">Sakit gusi ringan</option>
+                        <option value="46">Sakit kepala</option>
+                        <option value="47">Sakit otot</option>
+                        <option value="48">Sakit otot teruk</option>
+                        <option value="49">Sakit sendi</option>
+                        <option value="50">Sakit sendi teruk</option>
+                        <option value="51">sakit tekak</option>
+                        <option value="52">Sawan</option>
+                        <option value="53">Selesema</option>
+                        <option value="54">selulitis</option>
+                        <option value="55">Sendi bengkak</option>
+                        <option value="56">Sendi-sendi kemerahan</option>
+                        <option value="57">Sendi-sendi lembut</option>
+                        <option value="58">Sendi-sendi panas</option>
+                        <option value="59">Sesak nafas</option>
+                        <option value="60">Sukar bernafas</option>
+                    </select>
+
+                    <label for="Symptom_2" style="margin-top: 15px; margin-bottom: 10px;">Simptom 2: </label>
+                    <select id="Symptom_2" name="Symptom_2" class="form-control form-control-lg select2" required>
+                        <option selected>Pilih Simptom</option>
+                        <option value="0">Air kencing gelap</option>
+                        <option value="1">Air kencing gelap atau berdarah</option>
+                        <option value="2">Anemia</option>
+                        <option value="3">Batuk berdarah</option>
+                        <option value="4">Batuk berkahak</option>
+                        <option value="5">batuk berterusan</option>
+                        <option value="6">batuk kering</option>
+                        <option value="7">berat badan turun</option>
+                        <option value="8">Berpeluh malam</option>
+                        <option value="9">Bintik-bintik merah di badan</option>
+                        <option value="10">Cirit-birit</option>
+                        <option value="11">Dehidrasi</option>
+                        <option value="12">hidung berair dan tersumbat</option>
+                        <option value="13">Jangkitan kulit</option>
+                        <option value="14">Jangkitan salur pernafasan</option>
+                        <option value="15">Kelenjar bengkak</option>
+                        <option value="16">Kulit kemerah-merahan</option>
+                        <option value="17">kulit kering</option>
+                        <option value="18">Kurang selera makan</option>
+                        <option value="19">Lesu</option>
+                        <option value="20">Loya</option>
+                        <option value="21">Malaise</option>
+                        <option value="22">Mata atau mulut kuning</option>
+                        <option value="23">Mata bengkak</option>
+                        <option value="24">Menangis berlebihan</option>
+                        <option value="25">Menggigil</option>
+                        <option value="26">Muntah</option>
+                        <option value="27">Najis berwarna cerah</option>
+                        <option value="28">Payudara bengkak</option>
+                        <option value="29">Payudara kemerah-merahan</option>
+                        <option value="30">Payudara membesar</option>
+                        <option value="31">Payudara panas</option>
+                        <option value="32">Payudara sakit</option>
+                        <option value="33">Pendarahan luar biasa</option>
+                        <option value="34">Pendarahan ringan</option>
+                        <option value="35">Pergerakan tersentak</option>
+                        <option value="36">Perut terasa berat</option>
+                        <option value="37">Ruam</option>
+                        <option value="38">Ruam berbentuk cincin</option>
+                        <option value="39">Ruam meluas</option>
+                        <option value="40">Sakit badan</option>
+                        <option value="41">Sakit bahagian perut</option>
+                        <option value="42">sakit dada</option>
+                        <option value="43">Sakit di belakang mata</option>
+                        <option value="44">Sakit di pelvis</option>
+                        <option value="45">Sakit gusi ringan</option>
+                        <option value="46">Sakit kepala</option>
+                        <option value="47">Sakit otot</option>
+                        <option value="48">Sakit otot teruk</option>
+                        <option value="49">Sakit sendi</option>
+                        <option value="50">Sakit sendi teruk</option>
+                        <option value="51">sakit tekak</option>
+                        <option value="52">Sawan</option>
+                        <option value="53">Selesema</option>
+                        <option value="54">selulitis</option>
+                        <option value="55">Sendi bengkak</option>
+                        <option value="56">Sendi-sendi kemerahan</option>
+                        <option value="57">Sendi-sendi lembut</option>
+                        <option value="58">Sendi-sendi panas</option>
+                        <option value="59">Sesak nafas</option>
+                        <option value="60">Sukar bernafas</option>
+                    </select>
+                
+                    <label for="Symptom_3" style="margin-top: 15px; margin-bottom: 10px;">Simptom 3: </label>
+                    <select id="Symptom_3" name="Symptom_3" class="form-control form-control-lg select2" required>
+                        <option selected>Pilih Simptom</option>
+                        <option value="0">Air kencing gelap</option>
+                        <option value="1">Air kencing gelap atau berdarah</option>
+                        <option value="2">Anemia</option>
+                        <option value="3">Batuk berdarah</option>
+                        <option value="4">Batuk berkahak</option>
+                        <option value="5">batuk berterusan</option>
+                        <option value="6">batuk kering</option>
+                        <option value="7">berat badan turun</option>
+                        <option value="8">Berpeluh malam</option>
+                        <option value="9">Bintik-bintik merah di badan</option>
+                        <option value="10">Cirit-birit</option>
+                        <option value="11">Dehidrasi</option>
+                        <option value="12">hidung berair dan tersumbat</option>
+                        <option value="13">Jangkitan kulit</option>
+                        <option value="14">Jangkitan salur pernafasan</option>
+                        <option value="15">Kelenjar bengkak</option>
+                        <option value="16">Kulit kemerah-merahan</option>
+                        <option value="17">kulit kering</option>
+                        <option value="18">Kurang selera makan</option>
+                        <option value="19">Lesu</option>
+                        <option value="20">Loya</option>
+                        <option value="21">Malaise</option>
+                        <option value="22">Mata atau mulut kuning</option>
+                        <option value="23">Mata bengkak</option>
+                        <option value="24">Menangis berlebihan</option>
+                        <option value="25">Menggigil</option>
+                        <option value="26">Muntah</option>
+                        <option value="27">Najis berwarna cerah</option>
+                        <option value="28">Payudara bengkak</option>
+                        <option value="29">Payudara kemerah-merahan</option>
+                        <option value="30">Payudara membesar</option>
+                        <option value="31">Payudara panas</option>
+                        <option value="32">Payudara sakit</option>
+                        <option value="33">Pendarahan luar biasa</option>
+                        <option value="34">Pendarahan ringan</option>
+                        <option value="35">Pergerakan tersentak</option>
+                        <option value="36">Perut terasa berat</option>
+                        <option value="37">Ruam</option>
+                        <option value="38">Ruam berbentuk cincin</option>
+                        <option value="39">Ruam meluas</option>
+                        <option value="40">Sakit badan</option>
+                        <option value="41">Sakit bahagian perut</option>
+                        <option value="42">sakit dada</option>
+                        <option value="43">Sakit di belakang mata</option>
+                        <option value="44">Sakit di pelvis</option>
+                        <option value="45">Sakit gusi ringan</option>
+                        <option value="46">Sakit kepala</option>
+                        <option value="47">Sakit otot</option>
+                        <option value="48">Sakit otot teruk</option>
+                        <option value="49">Sakit sendi</option>
+                        <option value="50">Sakit sendi teruk</option>
+                        <option value="51">sakit tekak</option>
+                        <option value="52">Sawan</option>
+                        <option value="53">Selesema</option>
+                        <option value="54">selulitis</option>
+                        <option value="55">Sendi bengkak</option>
+                        <option value="56">Sendi-sendi kemerahan</option>
+                        <option value="57">Sendi-sendi lembut</option>
+                        <option value="58">Sendi-sendi panas</option>
+                        <option value="59">Sesak nafas</option>
+                        <option value="60">Sukar bernafas</option>
+                    </select>
+                
+                    <label for="Symptom_4" style="margin-top: 15px; margin-bottom: 10px;">Simptom 4: </label>
+                    <select id="Symptom_4" name="Symptom_4" class="form-control form-control-lg select2" required>
+                        <option selected>Pilih Simptom</option>
+                        <option value="0">Air kencing gelap</option>
+                        <option value="1">Air kencing gelap atau berdarah</option>
+                        <option value="2">Anemia</option>
+                        <option value="3">Batuk berdarah</option>
+                        <option value="4">Batuk berkahak</option>
+                        <option value="5">batuk berterusan</option>
+                        <option value="6">batuk kering</option>
+                        <option value="7">berat badan turun</option>
+                        <option value="8">Berpeluh malam</option>
+                        <option value="9">Bintik-bintik merah di badan</option>
+                        <option value="10">Cirit-birit</option>
+                        <option value="11">Dehidrasi</option>
+                        <option value="12">hidung berair dan tersumbat</option>
+                        <option value="13">Jangkitan kulit</option>
+                        <option value="14">Jangkitan salur pernafasan</option>
+                        <option value="15">Kelenjar bengkak</option>
+                        <option value="16">Kulit kemerah-merahan</option>
+                        <option value="17">kulit kering</option>
+                        <option value="18">Kurang selera makan</option>
+                        <option value="19">Lesu</option>
+                        <option value="20">Loya</option>
+                        <option value="21">Malaise</option>
+                        <option value="22">Mata atau mulut kuning</option>
+                        <option value="23">Mata bengkak</option>
+                        <option value="24">Menangis berlebihan</option>
+                        <option value="25">Menggigil</option>
+                        <option value="26">Muntah</option>
+                        <option value="27">Najis berwarna cerah</option>
+                        <option value="28">Payudara bengkak</option>
+                        <option value="29">Payudara kemerah-merahan</option>
+                        <option value="30">Payudara membesar</option>
+                        <option value="31">Payudara panas</option>
+                        <option value="32">Payudara sakit</option>
+                        <option value="33">Pendarahan luar biasa</option>
+                        <option value="34">Pendarahan ringan</option>
+                        <option value="35">Pergerakan tersentak</option>
+                        <option value="36">Perut terasa berat</option>
+                        <option value="37">Ruam</option>
+                        <option value="38">Ruam berbentuk cincin</option>
+                        <option value="39">Ruam meluas</option>
+                        <option value="40">Sakit badan</option>
+                        <option value="41">Sakit bahagian perut</option>
+                        <option value="42">sakit dada</option>
+                        <option value="43">Sakit di belakang mata</option>
+                        <option value="44">Sakit di pelvis</option>
+                        <option value="45">Sakit gusi ringan</option>
+                        <option value="46">Sakit kepala</option>
+                        <option value="47">Sakit otot</option>
+                        <option value="48">Sakit otot teruk</option>
+                        <option value="49">Sakit sendi</option>
+                        <option value="50">Sakit sendi teruk</option>
+                        <option value="51">sakit tekak</option>
+                        <option value="52">Sawan</option>
+                        <option value="53">Selesema</option>
+                        <option value="54">selulitis</option>
+                        <option value="55">Sendi bengkak</option>
+                        <option value="56">Sendi-sendi kemerahan</option>
+                        <option value="57">Sendi-sendi lembut</option>
+                        <option value="58">Sendi-sendi panas</option>
+                        <option value="59">Sesak nafas</option>
+                        <option value="60">Sukar bernafas</option>
+                    </select>
+                
+                    <label for="Symptom_5" style="margin-top: 15px; margin-bottom: 10px;">Simptom 5: </label>
+                    <select id="Symptom_5" name="Symptom_5" class="form-control form-control-lg select2" required>
+                        <option selected>Pilih Simptom</option>
+                        <option value="0">Air kencing gelap</option>
+                        <option value="1">Air kencing gelap atau berdarah</option>
+                        <option value="2">Anemia</option>
+                        <option value="3">Batuk berdarah</option>
+                        <option value="4">Batuk berkahak</option>
+                        <option value="5">batuk berterusan</option>
+                        <option value="6">batuk kering</option>
+                        <option value="7">berat badan turun</option>
+                        <option value="8">Berpeluh malam</option>
+                        <option value="9">Bintik-bintik merah di badan</option>
+                        <option value="10">Cirit-birit</option>
+                        <option value="11">Dehidrasi</option>
+                        <option value="12">hidung berair dan tersumbat</option>
+                        <option value="13">Jangkitan kulit</option>
+                        <option value="14">Jangkitan salur pernafasan</option>
+                        <option value="15">Kelenjar bengkak</option>
+                        <option value="16">Kulit kemerah-merahan</option>
+                        <option value="17">kulit kering</option>
+                        <option value="18">Kurang selera makan</option>
+                        <option value="19">Lesu</option>
+                        <option value="20">Loya</option>
+                        <option value="21">Malaise</option>
+                        <option value="22">Mata atau mulut kuning</option>
+                        <option value="23">Mata bengkak</option>
+                        <option value="24">Menangis berlebihan</option>
+                        <option value="25">Menggigil</option>
+                        <option value="26">Muntah</option>
+                        <option value="27">Najis berwarna cerah</option>
+                        <option value="28">Payudara bengkak</option>
+                        <option value="29">Payudara kemerah-merahan</option>
+                        <option value="30">Payudara membesar</option>
+                        <option value="31">Payudara panas</option>
+                        <option value="32">Payudara sakit</option>
+                        <option value="33">Pendarahan luar biasa</option>
+                        <option value="34">Pendarahan ringan</option>
+                        <option value="35">Pergerakan tersentak</option>
+                        <option value="36">Perut terasa berat</option>
+                        <option value="37">Ruam</option>
+                        <option value="38">Ruam berbentuk cincin</option>
+                        <option value="39">Ruam meluas</option>
+                        <option value="40">Sakit badan</option>
+                        <option value="41">Sakit bahagian perut</option>
+                        <option value="42">sakit dada</option>
+                        <option value="43">Sakit di belakang mata</option>
+                        <option value="44">Sakit di pelvis</option>
+                        <option value="45">Sakit gusi ringan</option>
+                        <option value="46">Sakit kepala</option>
+                        <option value="47">Sakit otot</option>
+                        <option value="48">Sakit otot teruk</option>
+                        <option value="49">Sakit sendi</option>
+                        <option value="50">Sakit sendi teruk</option>
+                        <option value="51">sakit tekak</option>
+                        <option value="52">Sawan</option>
+                        <option value="53">Selesema</option>
+                        <option value="54">selulitis</option>
+                        <option value="55">Sendi bengkak</option>
+                        <option value="56">Sendi-sendi kemerahan</option>
+                        <option value="57">Sendi-sendi lembut</option>
+                        <option value="58">Sendi-sendi panas</option>
+                        <option value="59">Sesak nafas</option>
+                        <option value="60">Sukar bernafas</option>
+                    </select>
+
+                    <div class="text-center" style="margin-top: 15px;">
+                        <input type="submit" value="Hantar" class="btn btn-primary" style="font-size: 14px; text-align: center;">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        
+    </section>
+
+
+
+
+
+
+    <!-- ------------------------- HOME SECTION - FOOTER ---------------------- -->
+    <section class="footer">
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Hubungi Kami</h3>
+                <a href="#"><i class="fas fa-phone"></i> +603-7967 7200</a>
+                <a href="https://apm.um.edu.my/"><i class="fas fa-school"></i> Akademi Pengajian Melayu</a>
+                <a href="https://mail.google.com"><i class="fas fa-envelope"></i> apm@um.edu.my </a>
+            </div>
+
+            <div class="box">
+                <h3>Latar Belakang</h3>
+                <a href="https://apm.um.edu.my/sejarah-apm"><i class="fas fa-chevron-right"></i> Akademi Pengajian Melayu</a>
+                <a href="#"><i class="fas fa-chevron-right"></i> MalayMeds</a>
+                <a href="https://www.um.edu.my/"><i class="fas fa-chevron-right"></i> Universiti Malaya</a>
+            </div>
+        </div>
+
+        <div class="credit">Akademi Pengajian Melayu</div>
+    </section>
+
+    <style>
+        .select2-container .select2-selection--single{
+            height:34px !important;
+            font-size: 14px;
+            padding-top: 2px;
+        }
+        .select2-container--default .select2-selection--single{
+            border: 1px solid #ccc !important; 
+            border-radius: 5px !important; 
+        }
+    </style>
+
+    <!-- --------------- IMPORT IONICONS --------------- -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        $('.select2').select2();
+    </script>
+    <!-- --------------- JS SCRIPT --------------- -->
+    <script type="text/javascript" src="{{ url_for('static', filename='script/script.js') }}"></script>
+
+</body>
+</html>

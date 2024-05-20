@@ -1,0 +1,1902 @@
+/*---------------------------- CHATBOT JS ------------------------------*/
+const chatInput = document.querySelector(".chat-input textarea");
+const sendChatBtn = document.querySelector(".chat-input span");
+const chatbox = document.querySelector(".chatbox");
+const chatbotToggler = document.querySelector(".chatbot-toggler");
+const chatbotCloseBtn = document.querySelector(".close-btn");
+
+let userMessage;
+const API_KEY = "hanan" //omitable
+const inputInitHeight = chatInput.scrollHeight;
+
+const createChatLi = (message, className) => {
+    const chatLi = document.createElement("li");
+    chatLi.classList.add("chat", className);
+    let chatContent = className === "outgoing" ? `<p>${message}</p>` : `<span class="material-symbols-outlined">smart_toy</span><p>${message}</p>`;
+    //let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`; //omitable
+    //chatLi.querySelector("p").textContent = message; //omitable
+    chatLi.innerHTML = chatContent;
+    return chatLi;
+}
+
+// import OPEN AI API - omitable
+const generateResponse = (incomingChatLi) => {
+    const API_URL = "https://api.openai.com/v1/chat/completions";
+    const messageElement = incomingChatLi.querySelector("p");
+
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        },
+        body:JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{role: "user", content: userMessage}]
+        })
+    }
+
+    //Send API request to API, get response
+    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+        messageElement.textContent = data.choices[0].message.content;
+    }).catch((error) => {
+        messageElement.classList.add("error");
+        messageElement.textContent = "Something went wrong. Please try again.";
+    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+}
+
+const handleChat = () => {
+    userMessage = chatInput.value.trim();
+    if(!userMessage) return;
+    chatInput.value = ""; //keep chat input blank once the message is sent
+    chatInput.style.height = `${inputInitHeight}px`;
+
+    // Append the user's message to the chatbox
+    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+
+    setTimeout(() => {
+        // Display the thinking (...) message while waiting for the response
+        const incomingChatLi = createChatLi("...", "incoming") //omitable
+        chatbox.appendChild(incomingChatLi) //omitable
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+        // chatbox.appendChild(createChatLi("...", "incoming"));
+        generateResponse(incomingChatLi); //omitable
+    }, 600);
+}
+
+// Auto-resize the textarea height according to the content
+chatInput.addEventListener("input", () => {
+    // Adjust the height of the input textarea based on its content
+    chatInput.style.height = `${inputInitHeight}px`;
+    chatInput.style.height = `${chatInput.scrollHeight}px`;
+})
+
+// Send messageg on the click of the Enter button, go to next line on the Shift+Enter
+chatInput.addEventListener("keydown", (e) => {
+    // If Enter key is pressed without Shift key and the window
+    // width is greater than 800px, handle the chat
+    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800){
+        e.preventDefault();
+        handleChat();
+    }
+})
+
+sendChatBtn.addEventListener("click", handleChat);
+chatbotCloseBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+
+
+/*---------------------------- DIAGNOSE ME PAGES JS ------------------------------*/
+let step = document.getElementsByClassName('step');
+let prevBtn = document.getElementById('prev-btn');
+let nextBtn = document.getElementById('next-btn');
+let submitBtn = document.getElementById('submit-btn');
+let form = document.getElementsByTagName('form')[0];
+let preloader = document.getElementById('preloader-wrapper');
+let bodyElement = document.querySelector('body');
+let succcessDiv = document.getElementById('success');
+
+form.onsubmit = () => {
+    return false
+}
+let current_step = 0;
+let stepCount = 6
+step[current_step].classList.add('d-block');
+if (current_step == 0) {
+    prevBtn.classList.add('d-none');
+    submitBtn.classList.add('d-none');
+    nextBtn.classList.add('d-inline-block');
+}
+
+const progress = (value) => {
+    document.getElementsByClassName('progress-bar')[0].style.width = `${value}%`;
+}
+
+nextBtn.addEventListener('click', () => {
+    current_step++;
+    let previous_step = current_step - 1;
+    if ((current_step > 0) && (current_step <= stepCount)) {
+        prevBtn.classList.remove('d-none');
+        prevBtn.classList.add('d-inline-block');
+        step[current_step].classList.remove('d-none');
+        step[current_step].classList.add('d-block');
+        step[previous_step].classList.remove('d-block');
+        step[previous_step].classList.add('d-none');
+        if (current_step == stepCount) {
+            submitBtn.classList.remove('d-none');
+            submitBtn.classList.add('d-inline-block');
+            nextBtn.classList.remove('d-inline-block');
+            nextBtn.classList.add('d-none');
+        }
+    } else {
+        if (current_step > stepCount) {
+            form.onsubmit = () => {
+                return true
+            }
+        }
+    }
+    progress((100 / stepCount) * current_step);
+});
+ 
+ 
+prevBtn.addEventListener('click', () => {
+    if (current_step > 0) {
+        current_step--;
+        let previous_step = current_step + 1;
+        prevBtn.classList.add('d-none');
+        prevBtn.classList.add('d-inline-block');
+        step[current_step].classList.remove('d-none');
+        step[current_step].classList.add('d-block')
+        step[previous_step].classList.remove('d-block');
+        step[previous_step].classList.add('d-none');
+        if (current_step < stepCount) {
+            submitBtn.classList.remove('d-inline-block');
+            submitBtn.classList.add('d-none');
+            nextBtn.classList.remove('d-none');
+            nextBtn.classList.add('d-inline-block');
+            prevBtn.classList.remove('d-none');
+            prevBtn.classList.add('d-inline-block');
+        }
+    }
+ 
+    if (current_step == 0) {
+        prevBtn.classList.remove('d-inline-block');
+        prevBtn.classList.add('d-none');
+    }
+    progress((100 / stepCount) * current_step);
+});
+ 
+ 
+submitBtn.addEventListener('click', () => {
+    preloader.classList.add('d-block');
+ 
+    const timer = ms => new Promise(res => setTimeout(res, ms));
+ 
+    timer(3000)
+        .then(() => {
+            bodyElement.classList.add('loaded');
+        }).then(() => {
+            step[stepCount].classList.remove('d-block');
+            step[stepCount].classList.add('d-none');
+            prevBtn.classList.remove('d-inline-block');
+            prevBtn.classList.add('d-none');
+            submitBtn.classList.remove('d-inline-block');
+            submitBtn.classList.add('d-none');
+            succcessDiv.classList.remove('d-none');
+            succcessDiv.classList.add('d-block');
+        })
+ 
+});
+
+
+-------------------------------------------------
+DIAGNOSEME_PAGE ROUTE APP.PY_OLD1
+@app.route('/diagnoseme',methods = ['GET', 'POST'])
+def diagnoseme_page():
+  if request.method == 'POST':
+    to_predict_list = request.form.to_dict()
+    to_predict_list=list(to_predict_list.values())
+    to_predict_list = [value for value in to_predict_list if value != '']
+    if len(to_predict_list) < 5:
+      flash('Please select at least 5 symptoms for accurate diagnosis.', 'warning')
+      return redirect(url_for('diagnoseme_page'))
+    to_predict_list = list(map(int, to_predict_list))
+    result = ValuePredictor(to_predict_list)
+
+    if int(result)==0:
+      fever_id=1
+    elif int(result)==1:
+      fever_id=2
+    elif int(result)==2:
+      fever_id=3
+    elif int(result)==3:
+      fever_id=4
+    elif int(result)==4:
+      fever_id=5
+    elif int(result)==5:
+      fever_id=18
+    elif int(result)==6:
+      fever_id=6
+    elif int(result)==7:
+      fever_id=19
+    elif int(result)==8:
+      fever_id=7
+    elif int(result)==9:
+      fever_id=20
+    elif int(result)==10:
+      fever_id=8
+    elif int(result)==11:
+      fever_id=9
+    elif int(result)==12:
+      fever_id=10
+    elif int(result)==13:
+      fever_id=11
+    elif int(result)==14:
+      fever_id=12
+    elif int(result)==15:
+      fever_id=14
+    elif int(result)==16:
+      fever_id=15
+    elif int(result)==17:
+      fever_id=13
+    elif int(result)==18:
+      fever_id=16
+    else:
+      fever_id=17
+    
+    fever_details = tbl_fever.query.get(fever_id)
+    all_treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    treatment_details = tbl_treatment.query.all()
+
+    herb_ids = [detail.herbs_id for detail in all_treatment_details]
+    method_ids = [detail.method_id for detail in all_treatment_details]
+
+    herbs_details = tbl_herbs.query.filter(tbl_herbs.herbs_id.in_(herb_ids)).all()
+    methods_details = tbl_method.query.filter(tbl_method.method_id.in_(method_ids)).all()
+
+    herb_pic_paths = [url_for('uploaded_file', filename=herb.herbs_path) for herb in herbs_details]
+    method_pic_paths = [url_for('uploaded_file', filename=method.method_path) for method in methods_details]
+
+    return render_template("recommendation.html", fever_details=fever_details, all_treatment_details=all_treatment_details, 
+                           herbs_details=herbs_details, methods_details=methods_details, treatment_details=treatment_details,
+                           herb_pic_paths=herb_pic_paths, method_pic_paths=method_pic_paths, fever_id=fever_id)
+  return render_template("diagnosemeform.html")
+
+-------------------------------------------
+RECOMMENDATION.HTML_OLD14
+<!-- ------------------------- PREDICTION SECTION ---------------------------- -->
+    <section class="work" id="work">
+        <h1 class="page-heading"> Keputusan <span> Diagnosis </span> </h1>
+        <div class="container mt-5">
+            {% macro get_herbs_name(herbs_details, herbs_id) %}
+                {% for herb in herbs_details %}
+                    {% if herb.herbs_id == herbs_id %}
+                        {{ herb.herbs_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_method_name(methods_details, method_id) %}
+                {% for method in methods_details %}
+                    {% if method.method_id == method_id %}
+                        {{ method.method_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_treatment_steps(treatment_id) %}
+                {% for treatment in treatment_details %}
+                    {% if treatment.treatment_id == treatment_id %}
+                        {{ treatment.treatment_steps }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_herb_pic_path(herb) %}
+                {{ url_for('static', filename=herb.herbs_path) }}
+            {% endmacro %}
+
+            {% macro get_method_pic_path(method) %}
+                {{ url_for('static', filename=method.method_path) }}
+            {% endmacro %}
+
+            {% set grouped_treatments = {} %}
+
+            {% set _ = grouped_treatments.update({key: {'herbs_name': [], 'method_name': [], 'treatment_steps': [], 'alt_treatment': {}}}) %}
+
+            {% for detail in all_treatment_details %}
+                {% set key = detail.fever.fever_name %}
+                {% if key not in grouped_treatments %}
+                    {% set _ = grouped_treatments.update({key: {'herbs_name': [], 'method_name': [], 'treatment_steps': [], 'alt_treatment': {}}}) %}
+                {% endif %}
+
+                {% set herb = get_herbs_name(herbs_details, detail.herbs_id) %}
+                {% set method = get_method_name(methods_details, detail.method_id) %}
+
+                {% set _ = grouped_treatments[key].herbs_name.append(herb) if herb not in grouped_treatments[key].herbs_name %}
+                {% set _ = grouped_treatments[key].method_name.append(method) if method not in grouped_treatments[key].method_name %}
+                {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id)) %}
+                {% if detail.treatment.alt_treatment %}
+                    {% set _ = grouped_treatments[key].alt_treatment.update({detail.treatment_id: detail.treatment.alt_treatment}) %}
+                {% endif %}
+            {% endfor %}
+            
+            {% if grouped_treatments %}
+            <table class="table table-bordered" style="font-size: 13px;">
+                {% for key, item in grouped_treatments.items() %}
+                    <tr>
+                        <th>Nama Demam</th>
+                        <td>
+                            <a href="{{ url_for('feverinformation_page', fever_id=fever_id) }}" style="text-decoration: none;">{{ key }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Langkah Rawatan</th>
+                        <td>
+                            <ol>
+                                {% if item.treatment_steps %}
+                                    {% for step in item.treatment_steps[0].split('. ') %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li>No treatment steps available.</li>
+                                {% endif %}
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Rawatan Alternatif</th>
+                        <td>
+                            {% if item.alt_treatment and item.alt_treatment[all_treatment_details.treatment_id] %}
+                                <p>{{ item.alt_treatment[treatment.treatment_id] }}</p>
+                            {% else %}
+                                <p>Tiada rawatan alternatif.</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Kaedah Rawatan</th>
+                        <td>
+                            {% for i in range(item.method_name|length) %}
+                                <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                    <a href="{{ url_for('methodinformation_page', method_id=methods_details[i].method_id) }}" style="text-decoration: none;">
+                                        <img src="{{ url_for('display_method_image', method_id=methods_details[i].method_id) }}" alt="{{ item.method_name[i] }}" height="80" width="80">
+                                        <br>{{ item.method_name[i] }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Herba Digunakan</th>
+                        <td>
+                            {% for i in range(item.herbs_name|length) %}
+                                <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                    <a href="{{ url_for('herbinformation_page', herb_id=herbs_details[i].herbs_id) }}" style="text-decoration: none;">
+                                        <img src="{{ url_for('display_herb_image', herb_id=herbs_details[i].herbs_id) }}" alt="{{ item.herbs_name[i] }}" height="80" width="80">
+                                        <br>{{ item.herbs_name[i] }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No recommendation available.</p>
+        {% endif %}
+
+            <div class="text-center">
+                <a href="{{ url_for('diagnoseme_page') }}"><button type="button" class="btn btn-primary" style="font-size: 14px;">Start Over</button></a>
+                <a href="{{ url_for('home_page') }}"><button type="button" class="btn btn-danger" style="font-size: 14px;">Exit</button></a>
+            </div>
+        </div>
+    </section>
+
+----------------------------------
+RECOMMENDATION.HTML_OLD14
+<!-- ------------------------- PREDICTION SECTION ---------------------------- -->
+    <section class="work" id="work">
+        <h1 class="page-heading"> Keputusan <span> Diagnosis </span> </h1>
+        <div class="container mt-5">
+            {% macro get_herbs_name(herbs_details, herbs_id) %}
+                {% for herb in herbs_details %}
+                    {% if herb.herbs_id == herbs_id %}
+                        {{ herb.herbs_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_method_name(methods_details, method_id) %}
+                {% for method in methods_details %}
+                    {% if method.method_id == method_id %}
+                        {{ method.method_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_treatment_steps(treatment_id) %}
+                {% for treatment in treatment_details %}
+                    {% if treatment.treatment_id == treatment_id %}
+                        {{ treatment.treatment_steps }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_herb_pic_path(herb) %}
+                {{ url_for('static', filename=herb.herbs_path) }}
+            {% endmacro %}
+
+            {% macro get_method_pic_path(method) %}
+                {{ url_for('static', filename=method.method_path) }}
+            {% endmacro %}
+
+            {% set grouped_treatments = {} %}
+
+            {% for detail in all_treatment_details %}
+                {% set key = detail.fever.fever_name %}
+                {% if key not in grouped_treatments %}
+                    {% set _ = grouped_treatments.update({key: {'herbs_name': [], 'method_name': [], 'treatment_steps': []}}) %}
+                {% endif %}
+
+                {% set herb = get_herbs_name(herbs_details, detail.herbs_id) %}
+                {% set method = get_method_name(methods_details, detail.method_id) %}
+
+                {% set _ = grouped_treatments[key].herbs_name.append(herb) if herb not in grouped_treatments[key].herbs_name %}
+                {% set _ = grouped_treatments[key].method_name.append(method) if method not in grouped_treatments[key].method_name %}
+                {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id)) %}
+            {% endfor %}
+            
+            {% if grouped_treatments %}
+            <table class="table table-bordered" style="font-size: 13px;">
+                {% for key, item in grouped_treatments.items() %}
+                    <tr>
+                        <th>Nama Demam</th>
+                        <td>
+                            <a href="{{ url_for('feverinformation_page', fever_id=fever_id) }}" style="text-decoration: none;">{{ key }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Langkah Rawatan</th>
+                        <td>
+                            <ol>
+                                {% for step in item.treatment_steps[0].split('. ') %}
+                                    <li>{{ step }}</li>
+                                {% endfor %}
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Rawatan Alternatif</th>
+                        <td>
+                            {% if item.alt_treatment %}
+                                <p>{{ item.alt_treatment }}</p>
+                            {% else %}
+                                <p>Tiada rawatan alternatif.</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Kaedah Rawatan</th>
+                        <td>
+                            {% for i in range(item.method_name|length) %}
+                                <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                    <a href="{{ url_for('methodinformation_page', method_id=methods_details[i].method_id) }}" style="text-decoration: none;">
+                                        <img src="{{ url_for('display_method_image', method_id=methods_details[i].method_id) }}" alt="{{ item.method_name[i] }}" height="80" width="80">
+                                        <br>{{ item.method_name[i] }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Herba Digunakan</th>
+                        <td>
+                            {% for i in range(item.herbs_name|length) %}
+                                <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                    <a href="{{ url_for('herbinformation_page', herb_id=herbs_details[i].herbs_id) }}" style="text-decoration: none;">
+                                        <img src="{{ url_for('display_herb_image', herb_id=herbs_details[i].herbs_id) }}" alt="{{ item.herbs_name[i] }}" height="80" width="80">
+                                        <br>{{ item.herbs_name[i] }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No recommendation available.</p>
+        {% endif %}
+
+            <div class="text-center">
+                <a href="{{ url_for('diagnoseme_page') }}"><button type="button" class="btn btn-primary" style="font-size: 14px;">Start Over</button></a>
+                <a href="{{ url_for('home_page') }}"><button type="button" class="btn btn-danger" style="font-size: 14px;">Exit</button></a>
+            </div>
+        </div>
+    </section>
+
+---------------------------------------------
+RECOMMENDATION.HTML_OLD13
+<section class="work" id="work">
+        <h1 class="page-heading"> Keputusan <span> Diagnosis </span> </h1>
+        <div class="container mt-5">
+            {% macro get_herbs_name(herbs_details, herbs_id) %}
+                {% for herb in herbs_details %}
+                    {% if herb.herbs_id == herbs_id %}
+                        {{ herb.herbs_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_method_name(methods_details, method_id) %}
+                {% for method in methods_details %}
+                    {% if method.method_id == method_id %}
+                        {{ method.method_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_treatment_steps(treatment_id) %}
+                {% for treatment in treatment_details %}
+                    {% if treatment.treatment_id == treatment_id %}
+                        {{ treatment.treatment_steps }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_herb_pic_path(herb) %}
+                {{ url_for('static', filename=herb.herbs_path) }}
+            {% endmacro %}
+
+            {% macro get_method_pic_path(method) %}
+                {{ url_for('static', filename=method.method_path) }}
+            {% endmacro %}
+
+            {% set grouped_treatments = {} %}
+
+            {% for detail in all_treatment_details %}
+                {% set key = detail.fever.fever_name %}
+                {% if key not in grouped_treatments %}
+                    {% set _ = grouped_treatments.update({key: {'herbs_name': [], 'method_name': [], 'treatment_steps': []}}) %}
+                {% endif %}
+
+                {% set herb = get_herbs_name(herbs_details, detail.herbs_id) %}
+                {% set method = get_method_name(methods_details, detail.method_id) %}
+
+                {% set _ = grouped_treatments[key].herbs_name.append(herb) if herb not in grouped_treatments[key].herbs_name %}
+                {% set _ = grouped_treatments[key].method_name.append(method) if method not in grouped_treatments[key].method_name %}
+                {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id)) %}
+            {% endfor %}
+            
+            {% if grouped_treatments %}
+            <table class="table table-bordered" style="font-size: 13px;">
+                {% for key, item in grouped_treatments.items() %}
+                    <tr>
+                        <th>Nama Demam</th>
+                        <td>
+                            <a href="{{ url_for('feverinformation_page', fever_id=fever_id) }}" style="text-decoration: none;">{{ key }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Langkah Rawatan</th>
+                        <td>
+                            <ol>
+                                {% for step in item.treatment_steps[0].split('. ') %}
+                                    <li>{{ step }}</li>
+                                {% endfor %}
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Rawatan Alternatif</th>
+                        <td>
+                            {% if item.alt_treatment %}
+                                <p>{{ item.alt_treatment }}</p>
+                            {% else %}
+                                <p>Tiada rawatan alternatif.</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Kaedah Rawatan</th>
+                        <td>
+                            {% for i in range(item.method_name|length) %}
+                                <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                    <a href="{{ url_for('methodinformation_page', method_id=methods_details[i].method_id) }}" style="text-decoration: none;">
+                                        <img src="{{ url_for('display_method_image', method_id=methods_details[i].method_id) }}" alt="{{ item.method_name[i] }}" height="80" width="80">
+                                        <br>{{ item.method_name[i] }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Herba Digunakan</th>
+                        <td>
+                            {% for i in range(item.herbs_name|length) %}
+                                <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                    <a href="{{ url_for('herbinformation_page', herb_id=herbs_details[i].herbs_id) }}" style="text-decoration: none;">
+                                        <img src="{{ url_for('display_herb_image', herb_id=herbs_details[i].herbs_id) }}" alt="{{ item.herbs_name[i] }}" height="80" width="80">
+                                        <br>{{ item.herbs_name[i] }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No recommendation available.</p>
+        {% endif %}
+
+            <div class="text-center">
+                <a href="{{ url_for('diagnoseme_page') }}"><button type="button" class="btn btn-primary" style="font-size: 14px;">Start Over</button></a>
+                <a href="{{ url_for('home_page') }}"><button type="button" class="btn btn-danger" style="font-size: 14px;">Exit</button></a>
+            </div>
+        </div>
+    </section>
+
+------------------------------------------
+RECOMMENDATION.HTML_OLD12
+<!-- {% if grouped_treatments %}
+                <table class="table table-bordered" style="font-size: 13px;">
+                    {% for key, item in grouped_treatments.items() %}
+                        <tr>
+                            <th>Nama Demam</th>
+                            <td>
+                                <a href="{{ url_for('feverinformation_page', fever_id=fever_id) }}" style="text-decoration: none;">{{ key }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Langkah Rawatan</th>
+                            <td>
+                                <ol>
+                                    {% for step in item.treatment_steps[0].split('. ') %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Kaedah Rawatan</th>
+                            <td>
+                                {% for i in range(item.method_name|length) %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <a href="{{ url_for('methodinformation_page', method_id=methods_details[i].method_id) }}" style="text-decoration: none;">
+                                            <img src="{{ url_for('display_method_image', method_id=methods_details[i].method_id) }}" alt="{{ item.method_name[i] }}" height="80" width="80">
+                                            <br>{{ item.method_name[i] }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Herba Digunakan</th>
+                            <td>
+                                {% for i in range(item.herbs_name|length) %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <a href="{{ url_for('herbinformation_page', herb_id=herbs_details[i].herbs_id) }}" style="text-decoration: none;">
+                                            <img src="{{ url_for('display_herb_image', herb_id=herbs_details[i].herbs_id) }}" alt="{{ item.herbs_name[i] }}" height="80" width="80">
+                                            <br>{{ item.herbs_name[i] }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %} -->
+
+
+
+-----------------------------------------------
+LOGIN & REGISTER CSS SOURCE
+https://preview.colorlib.com/theme/bootstrap/login-form-08/#
+
+------------------------------------------------
+RECOMMENDATION.HTML_OLD11
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalayMeds</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- ---------------------- NAVIGATION BAR --------------------- -->
+    <header class="main-header">
+        <a href="{{ url_for('home_page') }}" class="logo">
+            <span class="logo-icon"><ion-icon name="fitness"></ion-icon></span>
+            <span class="logo-text">MalayMeds</span>
+        </a>
+        <div class="group">
+            <ul class="navigation">
+                <li><a href="{{ url_for('home_page') }}">Home</a></li>
+                <li><a href="{{ url_for('diagnoseme_page') }}">Diagnose Me</a></li>
+                <li>
+                    <a href="#">Glossary</a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url_for('searchherbs_page') }}">Search Herbs</a></li>
+                        <li><a href="{{ url_for('searchmethods_page') }}">Search Method</a></li>
+                        <li><a href="{{ url_for('searchfever_page') }}">Search Fever</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+            <ion-icon name="menu-outline" class="menuToggle"></ion-icon>
+        </div>
+    </header>
+
+
+    <!-- ------------------------- PREDICTION SECTION ---------------------------- -->
+    <section class="work" id="work">
+        <h1 class="page-heading"> Keputusan <span> Diagnosis </span> </h1>
+        <div class="container mt-5">
+            {% macro get_herbs_name(herbs_details, herbs_id) %}
+                {% for herb in herbs_details %}
+                    {% if herb.herbs_id == herbs_id %}
+                        {{ herb.herbs_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_method_name(methods_details, method_id) %}
+                {% for method in methods_details %}
+                    {% if method.method_id == method_id %}
+                        {{ method.method_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_treatment_steps(treatment_id) %}
+                {% for treatment in treatment_details %}
+                    {% if treatment.treatment_id == treatment_id %}
+                        {{ treatment.treatment_steps }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_herb_pic_path(herb) %}
+                {{ url_for('static', filename=herb.herbs_path) }}
+            {% endmacro %}
+
+            {% macro get_method_pic_path(method) %}
+                {{ url_for('static', filename=method.method_path) }}
+            {% endmacro %}
+
+            {% set grouped_treatments = {} %}
+
+            {% for detail in all_treatment_details %}
+                {% set key = detail.fever.fever_name %}
+                {% if key not in grouped_treatments %}
+                    {% set _ = grouped_treatments.update({key: {'herbs_name': [], 'method_name': [], 'treatment_steps': []}}) %}
+                {% endif %}
+
+                {% set herb = get_herbs_name(herbs_details, detail.herbs_id) %}
+                {% set method = get_method_name(methods_details, detail.method_id) %}
+
+                {% set _ = grouped_treatments[key].herbs_name.append(herb) if herb not in grouped_treatments[key].herbs_name %}
+                {% set _ = grouped_treatments[key].method_name.append(method) if method not in grouped_treatments[key].method_name %}
+                {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id)) %}
+            {% endfor %}
+            
+            {% if grouped_treatments %}
+                <table class="table table-bordered" style="font-size: 13px;">
+                    {% for key, item in grouped_treatments.items() %}
+                        <tr>
+                            <th>Nama Demam</th>
+                            <td>{{ key }}</td>
+                        </tr>
+                        <tr>
+                            <th>Langkah Rawatan</th>
+                            <td>
+                                <ol>
+                                    {% for step in item.treatment_steps[0].split('. ') %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Kaedah Rawatan</th>
+                            <td>
+                                {% for i in range(item.method_name|length) %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ get_method_pic_path(methods_details[i]) }}" alt="{{ item.method_name[i] }}" height="80" width="80">
+                                        <br>{{ item.method_name[i] }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Herba Digunakan</th>
+                            <td>
+                                {% for i in range(item.herbs_name|length) %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ get_herb_pic_path(herbs_details[i]) }}" alt="{{ item.herbs_name[i] }}" height="80" width="80">
+                                        <br>{{ item.herbs_name[i] }} 
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %}
+
+            <div class="text-center">
+                <a href="{{ url_for('diagnoseme_page') }}"><button type="button" class="btn btn-primary" style="font-size: 14px;">Start Over</button></a>
+                <a href="{{ url_for('home_page') }}"><button type="button" class="btn btn-danger" style="font-size: 14px;">Exit</button></a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ------------------------- HOME SECTION - FOOTER ---------------------- -->
+    <section class="footer">
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Contact Info</h3>
+                <a href="#"><i class="fas fa-phone"></i> +123-456-7890</a>
+                <a href="#"><i class="fas fa-phone"></i> +123-456-7890</a>
+                <a href="#"><i class="fas fa-school"></i> Akademi Pengajian Melayu</a>
+                <a href="#"><i class="fas fa-envelope"></i> apm@um.edu.my </a>
+            </div>
+
+            <div class="box">
+                <h3>About Us</h3>
+                <a href="#"><i class="fas fa-chevron-right"></i> Akademi Pengajian Melayu</a>
+                <a href="#"><i class="fas fa-chevron-right"></i> MalayMeds</a>
+                <a href="#"><i class="fas fa-chevron-right"></i> University of Malaya</a>
+            </div>
+        </div>
+
+        <div class="credit">Akademi Pengajian Melayu</div>
+    </section>
+
+    <!-- --------------- IMPORT IONICONS --------------- -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+    <!-- --------------- JS SCRIPT --------------- -->
+    <script type="text/javascript" src="{{ url_for('static', filename='script/script.js') }}"></script>
+
+</html>
+
+-------------------------------------
+RES_SEARCHHERBS.HTML OLD_1
+<!-- <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Nama</th>
+            <th>Nama Saintifik</th>
+            <th>Penerangan</th>
+            <th>Bahagian Digunakan</th>
+            <th>Tindakan</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in herb %}  
+            <tr class="herb-row" data-herb-id="{{ row.herbs_id }}">
+                <td>{{ row.herbs_name }}</td>
+                <td>{{ row.herbs_scname }}</td>
+                <td>{{ row.herbs_desc }}</td>
+                <td>{{ row.herbs_parts }}</td>
+                <td>
+                    <a href="{{ url_for('herbinformation_page', herb_id=row.herbs_id) }}" class="btn btn-primary btn-lg">Lihat</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table> -->
+
+<!-- <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Nama</th>
+            <th>Nama Saintifik</th>
+            <th>Penerangan</th>
+            <th>Bahagian Digunakan</th>
+            <th>Tindakan</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if herb %}
+            {% for row in herb %}
+                <tr class="herb-row" data-herb-id="{{ row.herbs_id }}">
+                    <td>{{ row.herbs_name }}</td>
+                    <td>{{ row.herbs_scname }}</td>
+                    <td>{{ row.herbs_desc }}</td>
+                    <td>{{ row.herbs_parts }}</td>
+                    <td>
+                        <a href="{{ url_for('herbinformation_page', herb_id=row.herbs_id) }}" class="btn btn-primary btn-lg">Lihat</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">No information available</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table> -->
+
+-------------------------------------
+RES_SEARCHMETHOD.HTML (no 'Lihat' button)
+<table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Method Name</th>
+            <th>Method Definition</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in meth %}  
+            <tr>
+                <td>{{row.method_name}}</td>
+                <td>{{row.method_def}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+-------------------------------------
+RES_SEARCHFEVER (no 'Lihat' button)
+<table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Scientific Name</th>
+            <th>Definition</th>
+            <th>Symptoms</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in fever %}  
+            <tr>
+                <td>{{row.fever_name}}</td>
+                <td>{{row.fever_scname}}</td>
+                <td>{{row.fever_def}}</td>
+                <td>{{row.fever_symptoms}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+----------------------------------------
+RECOMENDATION.HTML_OLD11 ()
+{% set grouped_treatments = {} %}
+
+            {% for detail in all_treatment_details %}
+                {% set key = detail.fever.fever_name %}
+                {% if key not in grouped_treatments %}
+                    {% set _ = grouped_treatments.update({key: {'herbs': [], 'methods': [], 'treatment_steps': []}}) %}
+                {% endif %}
+
+                {% set herb_index = loop.index0 %}
+                {% if herb_index < herbs_details|length %}
+                    {% set herb = get_herbs_name(herbs_details, detail.herbs_id) %}
+                    {% set herb_pic = get_herb_pic_path(herbs_details[herb_index]) %}
+                {% endif %}
+
+                {% set method_index = loop.index0 %}
+                {% if method_index < methods_details|length %}
+                    {% set method = get_method_name(methods_details, detail.method_id) %}
+                    {% set method_pic = get_method_pic_path(methods_details[method_index]) %}
+                {% endif %}
+
+                {% set _ = grouped_treatments[key].herbs.append({'name': herb, 'pic': herb_pic}) if herb %}
+                {% set _ = grouped_treatments[key].methods.append({'name': method, 'pic': method_pic}) if method %}
+                {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id) if detail.treatment_id else '') %}
+            {% endfor %}
+
+            <!-- Display table -->
+            {% if grouped_treatments %}
+                <table class="table table-bordered" style="font-size: 13px;">
+                    {% for key, item in grouped_treatments.items() %}
+                        <tr>
+                            <th>Nama Demam</th>
+                            <td>{{ key }}</td>
+                        </tr>
+                        <tr>
+                            <th>Langkah Rawatan</th>
+                            <td>
+                                <ol>
+                                    {% for step in item.treatment_steps[0].split('. ') %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Herba Digunakan</th>
+                            <td>
+                                {% for herb in item.herbs %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ herb.pic }}" alt="{{ herb.name }}" height="80" width="80">
+                                        <br>{{ herb.name }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Kaedah Rawatan</th>
+                            <td>
+                                {% for method in item.methods %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ method.pic }}" alt="{{ method.name }}" height="80" width="80">
+                                        <br>{{ method.name }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %}
+            
+---------------------------------
+RECOMMENDATION.HTML_OLD10 (wrong pic order)
+<!-- Display table -->
+            {% if grouped_treatments %}
+                <table class="table table-bordered" style="font-size: 13px;">
+                    {% for key, item in grouped_treatments.items() %}
+                        <tr>
+                            <th>Nama Demam</th>
+                            <td>{{ key }}</td>
+                        </tr>
+                        <tr>
+                            <th>Langkah Rawatan</th>
+                            <td>
+                                <ol>
+                                    {% for step in item.treatment_steps[0].split('. ') %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Herba Digunakan</th>
+                            <td>
+                                {% for i in range(item.herbs_name|length) %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ get_herb_pic_path(herbs_details[loop.index0]) }}" alt="{{ item.herbs_name[i] }}" height="80" width="80">
+                                        <br>{{ item.herbs_name[i] }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Kaedah Rawatan</th>
+                            <td>
+                                {% for i in range(item.method_name|length) %}
+                                    <div style="display: inline-block; text-align: center; margin-right: 15px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ get_method_pic_path(methods_details[loop.index0]) }}" alt="{{ item.method_name[i] }}" height="80" width="80">
+                                        <br>{{ item.method_name[i] }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %}
+---------------------------------------
+RECOMMENDATION.HTML OLD_9 (with pictures herbs name beside)
+{% macro get_herbs_name(herbs_details, herbs_id) %}
+                {% for herb in herbs_details %}
+                    {% if herb.herbs_id == herbs_id %}
+                        {{ herb.herbs_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_method_name(methods_details, method_id) %}
+                {% for method in methods_details %}
+                    {% if method.method_id == method_id %}
+                        {{ method.method_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_treatment_steps(treatment_id) %}
+                {% for treatment in treatment_details %}
+                    {% if treatment.treatment_id == treatment_id %}
+                        {{ treatment.treatment_steps }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_herb_pic_path(herb) %}
+                {{ url_for('static', filename=herb.herbs_path) }}
+            {% endmacro %}
+
+            {% macro get_method_pic_path(method) %}
+                {{ url_for('static', filename=method.method_path) }}
+            {% endmacro %}
+
+            {% set grouped_treatments = {} %}
+
+            {% for detail in all_treatment_details %}
+                {% set key = detail.fever.fever_name %}
+                {% if key not in grouped_treatments %}
+                    {% set _ = grouped_treatments.update({key: {'herbs_name': [], 'method_name': [], 'treatment_steps': []}}) %}
+                {% endif %}
+
+                {% set herb = get_herbs_name(herbs_details, detail.herbs_id) %}
+                {% set method = get_method_name(methods_details, detail.method_id) %}
+
+                {% set _ = grouped_treatments[key].herbs_name.append(herb) if herb not in grouped_treatments[key].herbs_name %}
+                {% set _ = grouped_treatments[key].method_name.append(method) if method not in grouped_treatments[key].method_name %}
+                {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id)) %}
+            {% endfor %}
+
+            <!-- Display table -->
+            {% if grouped_treatments %}
+                <table class="table table-bordered" style="font-size: 13px;">
+                    {% for key, item in grouped_treatments.items() %}
+                        <tr>
+                            <th>Nama Demam</th>
+                            <td>{{ key }}</td>
+                        </tr>
+                        <tr>
+                            <th>Langkah Rawatan</th>
+                            <td>
+                                <ol>
+                                    {% for step in item.treatment_steps[0].split('. ') %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Herba Digunakan</th>
+                            <td>
+                                {% for i in range(item.herbs_name|length) %}
+                                    <div style="display: inline-block; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ get_herb_pic_path(herbs_details[loop.index0]) }}" alt="{{ item.herbs_name[i] }}" height="70" width="70">
+                                        {{ item.herbs_name[i] }}<br>
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Kaedah Rawatan</th>
+                            <td>
+                                {% for i in range(item.method_name|length) %}
+                                    <div style="display: inline-block; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ get_method_pic_path(methods_details[loop.index0]) }}" alt="{{ item.method_name[i] }}" height="70" width="70">
+                                        {{ item.method_name[i] }}<br>
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %}
+
+--------------------------------
+RECOMMENDATION.HTML OLD_8 (with tables but no pictures)
+{% macro get_herbs_name(herbs_details, herbs_id) %}
+                {% for herb in herbs_details %}
+                    {% if herb.herbs_id == herbs_id %}
+                        {{ herb.herbs_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_method_name(methods_details, method_id) %}
+                {% for method in methods_details %}
+                    {% if method.method_id == method_id %}
+                        {{ method.method_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_treatment_steps(treatment_id) %}
+                {% for treatment in treatment_details %}
+                    {% if treatment.treatment_id == treatment_id %}
+                        {{ treatment.treatment_steps }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% set grouped_treatments = {} %}
+
+            {% for detail in all_treatment_details %}
+                {% set key = detail.fever.fever_name %}
+                {% set item = {'herbs_name': [], 'method_name': [], 'treatment_steps': []} %}
+
+                {% if key not in grouped_treatments %}
+                    {% set _ = grouped_treatments.update({key: item}) %}
+                {% endif %}
+
+                {% set _ = grouped_treatments[key].herbs_name.append(get_herbs_name(herbs_details, detail.herbs_id)) if get_herbs_name(herbs_details, detail.herbs_id) not in grouped_treatments[key].herbs_name %}
+                {% set _ = grouped_treatments[key].method_name.append(get_method_name(methods_details, detail.method_id)) if get_method_name(methods_details, detail.method_id) not in grouped_treatments[key].method_name %}
+                {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id)) if get_treatment_steps(detail.treatment_id) not in grouped_treatments[key].treatment_steps %}
+            {% endfor %}
+
+            <!-- Display table -->
+            {% if grouped_treatments %}
+                <table class="table table-bordered" style="font-size: 13px;">
+                    {% for key, item in grouped_treatments.items() %}
+                        <tr>
+                            <th>Nama Demam</th>
+                            <td>{{ key }}</td>
+                        </tr>
+                        <tr>
+                            <th>Langkah Rawatan</th>
+                            <td>
+                                <ol>
+                                    {% for step in item.treatment_steps[0].split('. ') %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Herba Digunakan</th>
+                            <td>{{ ', '.join(item.herbs_name) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Kaedah Rawatan</th>
+                            <td>{{ ', '.join(item.method_name) }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %}
+
+-----------------------------
+RECOMMENDATION.HTML OLD_7
+{% if grouped_treatments %}
+    <ul>
+        {% for key, item in grouped_treatments.items() %}
+            <li>
+                <strong>Fever Name:</strong> {{ key }}<br>
+                <strong>Herbs Name:</strong> {{ ', '.join(item.herbs_name) }}<br>
+                <strong>Method Name:</strong> {{ ', '.join(item.method_name) }}<br>
+                <strong>Treatment Steps:</strong>
+                <ol>
+                    {% for step in item.treatment_steps[0].split('. ') %}
+                        <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recommendation available.</p>
+{% endif %}
+
+------------------------------
+RECOMMENDATION.HTML OLD_6
+{% macro get_herbs_name(herbs_details, herbs_id) %}
+    {% for herb in herbs_details %}
+        {% if herb.herbs_id == herbs_id %}
+            {{ herb.herbs_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_method_name(methods_details, method_id) %}
+    {% for method in methods_details %}
+        {% if method.method_id == method_id %}
+            {{ method.method_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_treatment_steps(treatment_id) %}
+    {% for treatment in treatment_details %}
+        {% if treatment.treatment_id == treatment_id %}
+            {{ treatment.treatment_steps }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% set grouped_treatments = {} %}
+
+{% for detail in all_treatment_details %}
+    {% set key = detail.fever.fever_name %}
+    {% set item = {'herbs_name': [], 'method_name': [], 'treatment_steps': []} %}
+
+    {% if key not in grouped_treatments %}
+        {% set _ = grouped_treatments.update({key: item}) %}
+    {% endif %}
+
+    {% set _ = grouped_treatments[key].herbs_name.append(get_herbs_name(herbs_details, detail.herbs_id)) if get_herbs_name(herbs_details, detail.herbs_id) not in grouped_treatments[key].herbs_name %}
+    {% set _ = grouped_treatments[key].method_name.append(get_method_name(methods_details, detail.method_id)) if get_method_name(methods_details, detail.method_id) not in grouped_treatments[key].method_name %}
+    {% set _ = grouped_treatments[key].treatment_steps.append(get_treatment_steps(detail.treatment_id)) if get_treatment_steps(detail.treatment_id) not in grouped_treatments[key].treatment_steps %}
+{% endfor %}
+
+<!-- <h1>Recommendation</h1> -->
+{% if grouped_treatments %}
+    <ul>
+        {% for key, item in grouped_treatments.items() %}
+            <li>
+                <strong>Fever Name:</strong> {{ key }}<br>
+                <strong>Herbs Name:</strong> {{ ', '.join(item.herbs_name) }}<br>
+                <strong>Method Name:</strong> {{ ', '.join(item.method_name) }}<br>
+                <strong>Treatment Steps:</strong>
+                <ol>
+                    {% for step in item.treatment_steps %}
+                        <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recommendation available.</p>
+{% endif %}
+
+------------------------------
+RECOMMENDATION.HTML OLD_5
+{% macro get_herbs_name(herbs_details, herbs_id) %}
+    {% for herb in herbs_details %}
+        {% if herb.herbs_id == herbs_id %}
+            {{ herb.herbs_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_method_name(methods_details, method_id) %}
+    {% for method in methods_details %}
+        {% if method.method_id == method_id %}
+            {{ method.method_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_treatment_steps(treatment_id) %}
+    {% for treatment in treatment_details %}
+        {% if treatment.treatment_id == treatment_id %}
+            {{ treatment.treatment_steps }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% set grouped_treatments = {} %}
+
+{% for detail in all_treatment_details %}
+    {% set key = detail.fever.fever_name %}
+    {% set item = {'herbs_name': [get_herbs_name(herbs_details, detail.herbs_id)],
+                    'method_name': [get_method_name(methods_details, detail.method_id)],
+                    'treatment_steps': [get_treatment_steps(detail.treatment_id)]} %}
+
+    {% if key not in grouped_treatments %}
+        {% set _ = grouped_treatments.update({key: item}) %}
+    {% else %}
+        {% set _ = grouped_treatments[key].herbs_name.extend(item.herbs_name) %}
+        {% set _ = grouped_treatments[key].method_name.extend(item.method_name) %}
+        {% set _ = grouped_treatments[key].treatment_steps.extend(item.treatment_steps) %}
+    {% endif %}
+{% endfor %}
+
+<h1>Recommendation</h1>
+{% if grouped_treatments %}
+    <ul>
+        {% for key, item in grouped_treatments.items() %}
+            <li>
+                <strong>Fever Name:</strong> {{ key }}<br>
+                <strong>Herbs Name:</strong> {{ ', '.join(item.herbs_name) }}<br>
+                <strong>Method Name:</strong> {{ ', '.join(item.method_name) }}<br>
+                <strong>Treatment Steps:</strong>
+                <ol>
+                    {% for step in item.treatment_steps %}
+                        <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recommendation available.</p>
+{% endif %}
+
+
+-------------------------------------
+RECOMMENDATION.HTML OLD_4
+{% macro get_herbs_name(herbs_details, herbs_id) %}
+    {% for herb in herbs_details %}
+        {% if herb.herbs_id == herbs_id %}
+            {{ herb.herbs_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_method_name(methods_details, method_id) %}
+    {% for method in methods_details %}
+        {% if method.method_id == method_id %}
+            {{ method.method_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_treatment_steps(treatment_id) %}
+    {% for treatment in treatment_details %}
+        {% if treatment.treatment_id == treatment_id %}
+            {{ treatment.treatment_steps }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+<h1>Recommendation</h1>
+{% if all_treatment_details %}
+    {% set grouped_treatments = {} %}
+    {% for detail in all_treatment_details %}
+        {% set fever_name = fever_details.fever_name %}
+        {% set herbs_name = get_herbs_name(herbs_details, detail.herbs_id) %}
+        {% set method_name = get_method_name(methods_details, detail.method_id) %}
+        {% set treatment_steps = get_treatment_steps(detail.treatment_id) %}
+
+        {% set key = fever_name ~ herbs_name ~ method_name %}
+        {% set item = {'Fever Name': fever_name, 'Herbs Name': herbs_name, 'Method Name': method_name, 'Treatment Steps': treatment_steps} %}
+
+        {% if key not in grouped_treatments %}
+            {% set _ = grouped_treatments.update({key: item}) %}
+        {% endif %}
+    {% endfor %}
+
+    <ul>
+        {% for key, item in grouped_treatments.items() %}
+            <li>
+                <strong>Fever Name:</strong> {{ item['Fever Name'] }}<br>
+                <strong>Herbs Name:</strong> {{ item['Herbs Name'] }}<br>
+                <strong>Method Name:</strong> {{ item['Method Name'] }}<br>
+                <strong>Treatment Steps:</strong> {{ item['Treatment Steps'] }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recommendation available.</p>
+{% endif %}
+
+-------------------------------
+RECOMMENDATION.HTML OLD_3
+<h1 class="page-heading"> View <span> treatment </span> </h1>
+
+        <div class="container mt-5">
+            {% macro get_herbs_name(herbs_details, herbs_id) %}
+                {% for herb in herbs_details %}
+                    {% if herb.herbs_id == herbs_id %}
+                        {{ herb.herbs_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_method_name(methods_details, method_id) %}
+                {% for method in methods_details %}
+                    {% if method.method_id == method_id %}
+                        {{ method.method_name }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            {% macro get_treatment_steps(treatment_id) %}
+                {% for treatment in treatment_details %}
+                    {% if treatment.treatment_id == treatment_id %}
+                        {{ treatment.treatment_steps }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+
+            <h1>Recommendation</h1>
+            {% if all_treatment_details %}
+                <ul>
+                    {% for detail in all_treatment_details %}
+                        <li>
+                            <!-- <strong>Treatment ID:</strong> {{ detail.treatment_id }}<br> -->
+                            <strong>Fever Name:</strong> {{ fever_details.fever_name }}<br>
+                            <strong>Herbs Name:</strong> {{ get_herbs_name(herbs_details, detail.herbs_id) }}<br>
+                            <strong>Method Name:</strong> {{ get_method_name(methods_details, detail.method_id) }}<br>
+                            <strong>Treatment Steps:</strong> {{ get_treatment_steps(detail.treatment_id) }}<br>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %}
+
+
+---------------------------------------
+APP.PY OLD_2
+from flask import Flask, render_template, url_for, request
+from flask_sqlalchemy import SQLAlchemy
+import numpy as np
+import pickle
+
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database1.db"
+app.config['SECRET_KEY'] = 'malaymeds'
+db = SQLAlchemy(app) # db intitialized here
+
+# Define TBL_FEVER
+class tbl_fever(db.Model):
+  fever_id = db.Column(db.Integer, primary_key=True)
+  fever_name = db.Column(db.String(255))
+  fever_scname = db.Column(db.String(255))
+  fever_def = db.Column(db.Text)
+  herbs = db.relationship('tbl_herbs_fever', backref=db.backref('tbl_fever', cascade='all, delete-orphan', single_parent=True))
+  methods = db.relationship('tbl_method_fever', backref=db.backref('tbl_fever', cascade='all, delete-orphan', single_parent=True))
+
+# Define TBL_HERBS_FEVER
+class tbl_herbs_fever(db.Model):
+  herbs_fever_id = db.Column(db.Integer, primary_key=True)
+  herbs_id = db.Column(db.Integer, db.ForeignKey('tbl_herbs.herbs_id', onupdate='CASCADE', ondelete='CASCADE'))
+  fever_id = db.Column(db.Integer, db.ForeignKey('tbl_fever.fever_id', onupdate='CASCADE', ondelete='CASCADE'))
+
+# Define TBL_TREATMENT
+class tbl_treatment(db.Model):
+  treatment_id = db.Column(db.Integer, primary_key=True)
+  treatment_steps = db.Column(db.Text)
+  details = db.relationship('tbl_treatment_details', backref=db.backref('tbl_treatment', cascade='all, delete-orphan', single_parent=True))
+
+# Define TBL_HERBS
+class tbl_herbs(db.Model):
+  herbs_id = db.Column(db.Integer, primary_key=True)
+  herbs_name = db.Column(db.String(255))
+  herbs_scname = db.Column(db.String(255))
+  herbs_desc = db.Column(db.Text)
+  herbs_parts = db.Column(db.String(255))
+  herbs_pic = db.Column(db.String(255))
+  herbs_path = db.Column(db.String(255))
+  fevers = db.relationship('tbl_herbs_fever', backref=db.backref('tbl_herbs', cascade='all, delete-orphan', single_parent=True))
+
+# Define TBL_METHOD
+class tbl_method(db.Model):
+  method_id = db.Column(db.Integer, primary_key=True)
+  method_name = db.Column(db.String(255))
+  method_def = db.Column(db.Text)
+  method_path = db.Column(db.String(255))
+  method_pic = db.Column(db.String(255))
+  fevers = db.relationship('tbl_method_fever', backref=db.backref('tbl_method', cascade='all, delete-orphan', single_parent=True))
+
+# Define TBL_METHOD_FEVER
+class tbl_method_fever(db.Model):
+  method_fever_id = db.Column(db.Integer, primary_key=True)
+  fever_id = db.Column(db.Integer, db.ForeignKey('tbl_fever.fever_id', onupdate='CASCADE', ondelete='CASCADE'))
+  method_id = db.Column(db.Integer, db.ForeignKey('tbl_method.method_id', onupdate='CASCADE', ondelete='CASCADE'))
+
+# Define TBL_TREATMENT_DETAILS
+class tbl_treatment_details(db.Model):
+  detail_id = db.Column(db.Integer, primary_key=True)
+  treatment_id = db.Column(db.Integer, db.ForeignKey('tbl_treatment.treatment_id', onupdate='CASCADE', ondelete='CASCADE'))
+  fever_id = db.Column(db.Integer, db.ForeignKey('tbl_fever.fever_id', onupdate='CASCADE', ondelete='CASCADE'))
+  herbs_id = db.Column(db.Integer, db.ForeignKey('tbl_herbs.herbs_id', onupdate='CASCADE', ondelete='CASCADE'))
+  method_id = db.Column(db.Integer, db.ForeignKey('tbl_method.method_id', onupdate='CASCADE', ondelete='CASCADE'))
+
+# to push data into db
+with app.app_context():
+  db.create_all()
+
+@app.route('/')
+@app.route('/home')
+def home_page():
+  return render_template('index.html')
+
+#prediction function
+def ValuePredictor(to_predict_list):
+  to_predict = np.array(to_predict_list).reshape(1,5)
+  # to_predict = np.array(to_predict_list).reshape(1, len(to_predict_list))
+  loaded_model = pickle.load(open("model.pkl","rb"))
+  result = loaded_model.predict(to_predict)
+  return result[0]
+
+@app.route('/diagnoseme',methods = ['GET', 'POST'])
+def diagnoseme_page():
+  if request.method == 'POST':
+    to_predict_list = request.form.to_dict()
+    to_predict_list=list(to_predict_list.values())
+    to_predict_list = [value for value in to_predict_list if value != '']
+    to_predict_list = list(map(int, to_predict_list))
+    result = ValuePredictor(to_predict_list)
+    
+    if int(result)==0:
+      fever_id=1
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==1:
+      fever_id=2
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==2:
+      fever_id=3
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==3:
+      fever_id=4
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==4:
+      fever_id=5
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==5:
+      fever_id=18
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==6:
+      fever_id=6
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==7:
+      fever_id=19
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==8:
+      fever_id=7
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==9:
+      fever_id=20
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==10:
+      fever_id=8
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==11:
+      fever_id=9
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==12:
+      fever_id=10
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==13:
+      fever_id=11
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==14:
+      fever_id=12
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==15:
+      fever_id=14
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==16:
+      fever_id=15
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==17:
+      fever_id=13
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    elif int(result)==18:
+      fever_id=16
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    else:
+      fever_id=17
+      treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    
+    fever_details = tbl_fever.query.get(fever_id)
+    treatment_details = tbl_treatment_details.query.filter_by(fever_id=fever_id).all()
+    herb_ids = [detail.herbs_id for detail in treatment_details]
+    method_ids = [detail.method_id for detail in treatment_details]
+    herbs_details = tbl_herbs.query.filter(tbl_herbs.herbs_id.in_(herb_ids)).all()
+    methods_details = tbl_method.query.filter(tbl_method.method_id.in_(method_ids)).all()
+    return render_template("recommendation.html", fever_details=fever_details, treatment_details=treatment_details, herbs_details=herbs_details, methods_details=methods_details)
+  return render_template("diagnosemeform.html")
+
+if __name__ == "__main__":
+  app.run(debug=True)
+
+-------------------------------------
+RECOMMENDATION.HTML OLD_2
+<h1>Recommendation</h1>
+{% if treatment_details %}
+    <ul>
+        {% for detail in treatment_details %}
+            <li>
+                <strong>Treatment ID:</strong> {{ detail.treatment_id }}<br>
+                <strong>Fever ID:</strong> {{ detail.fever_id }} - {{ fever_details.fever_name }}<br>
+                <strong>Herbs ID:</strong> {{ detail.herbs_id }} - {{ get_herbs_name(herbs_details, detail.herbs_id) }}<br>
+                <strong>Method ID:</strong> {{ detail.method_id }} - {{ get_method_name(methods_details, detail.method_id) }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recommendation available.</p>
+{% endif %}
+<div class="text-center">
+    <a href="{{ url_for('diagnoseme_page') }}"><button type="button" class="btn btn-primary" style="font-size: 14px;">Start Over</button></a>
+    <a href="{{ url_for('home_page') }}"><button type="button" class="btn btn-danger" style="font-size: 14px;">Exit</button></a>
+</div>
+
+{% macro get_herbs_name(herbs_details, herbs_id) %}
+    {% for herb in herbs_details %}
+        {% if herb.herbs_id == herbs_id %}
+            {{ herb.herbs_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_method_name(methods_details, method_id) %}
+    {% for method in methods_details %}
+        {% if method.method_id == method_id %}
+            {{ method.method_name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+----------------------------------------------
+RECOMMENDATION.HTML OLD_1
+<h1>Recommendation</h1>
+            {% if treatment_details %}
+                <ul>
+                    {% for detail in treatment_details %}
+                        <li>
+                            <strong>Treatment ID:</strong> {{ detail.treatment_id }}<br>
+                            <strong>Fever ID:</strong> {{ detail.fever_id }}<br>
+                            <strong>Herbs ID:</strong> {{ detail.herbs_id }}<br>
+                            <strong>Method ID:</strong> {{ detail.method_id }}<br>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No recommendation available.</p>
+            {% endif %}
+
+----------------------------------------------
+# Putting ml into app.py
+
+from flask import Flask, render_template, request
+from ml_model import train_model  # Import the machine learning code
+
+app = Flask(__name)
+
+# Train the machine learning model and obtain the encoder
+model, encoder = train_model('your_dataset.csv')
+
+@app.route('/')
+@app.route('/home')
+def home_page():
+    return render_template('index.html')
+
+@app.route('/diagnoseme', methods=['GET', 'POST'])
+def diagnoseme_page():
+    if request.method == 'POST':
+        age = float(request.form['age'])
+        temperature = float(request.form['temperature'])
+        days_unwell = int(request.form['days_unwell'])
+        symptoms_1 = request.form['symptoms_1']
+        symptoms_2 = request.form['symptoms_2']
+        symptoms_3 = request.form['symptoms_3']
+        symptoms_4 = request.form['symptoms_4']
+
+        # Preprocess user input
+        user_input = [age, temperature, days_unwell, symptoms_1, symptoms_2, symptoms_3, symptoms_4]
+
+        # Encode user input
+        user_input_encoded = encoder.transform([user_input])
+
+        # Make predictions using the machine learning model
+        predicted_labels = model.predict(user_input_encoded)
+
+        # Extract disease and treatment predictions
+        predicted_disease = predicted_labels[0]
+        predicted_treatment = predicted_labels[1]
+
+        # Render the recommendation template
+        return render_template('recommendation.html', disease=predicted_disease, treatment=predicted_treatment)
+
+    return render_template('diagnoseme.html')
+
+# Your other routes
+
+#############################################
+
+# ml_model.py
+import pandas as pd
+from sklearn.preprocessing import OrdinalEncoder
+from sklearn.ensemble import RandomForestClassifier
+
+def train_model(data_path):
+    # Load the dataset
+    df = pd.read_csv(data_path)
+
+    # Encode categorical features
+    encoder = OrdinalEncoder()
+    categorical_columns = df.columns[1:]
+    df[categorical_columns] = encoder.fit_transform(df[categorical_columns])
+
+    # Handle missing values
+    df = df.fillna(0)
+
+    # Split the data
+    data = df.iloc[:, 1:].values
+    labels = df['Disease'].values
+
+    # Train the machine learning model
+    clf_rf = RandomForestClassifier(n_estimators=100, max_depth=15, min_samples_leaf=1)
+    clf_rf.fit(data, labels)
+
+    return clf_rf, encoder
+
+#############################################
+
+# app.py for dropdown
+from flask import Flask, render_template, request
+
+app = Flask(__name)
+
+@app.route('/')
+def home_page():
+    return render_template('index.html')
+
+@app.route('/diagnoseme', methods=['GET', 'POST'])
+def diagnoseme_page():
+    if request.method == 'POST':
+        # Access the data submitted by the form
+        selected_symptoms = request.form.getlist('symptoms')
+
+        # Process the data, for example, by using your machine learning model
+        # Call your machine learning model with selected_symptoms
+
+        # Return the result, for example, render a new template with the result
+        return render_template('result.html', result=selected_symptoms)
+
+    return render_template('diagnoseme.html')
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+
+
+
+
+<!-- <form method="POST" action="/diagnoseme" class="row g-3">
+                <div class="col-md-4">
+                    <label for="Symptom_1" class="col-form-label-lg">Symptom 1</label>
+                    <select id="Symptom_1" class="form-select form-select-lg">
+                        <option selected></option>
+                        <option>high fever</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="Symptom_1" class="col-form-label-lg">Symptom 1</label>
+                    <select id="Symptom_1" class="form-select form-select-lg">
+                        <option selected></option>
+                        <option>high fever</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="Symptom_1" class="col-form-label-lg">Symptom 1</label>
+                    <select id="Symptom_1" class="form-select form-select-lg">
+                        <option selected></option>
+                        <option>high fever</option>
+                    </select>
+                </div>                
+            </form> -->
+
+            # import pandas as pd
+# from sklearn.preprocessing import OrdinalEncoder
+# from sklearn.ensemble import RandomForestClassifier
+
+# def train_model(data_path):
+#     # Load the dataset
+#     df = pd.read_csv(data_path)
+
+#     # Encode categorical features
+#     encoder = OrdinalEncoder()
+#     categorical_columns = df.columns[1:]
+#     df[categorical_columns] = encoder.fit_transform(df[categorical_columns])
+
+#     # Handle missing values
+#     df = df.fillna(0)
+
+#     # Split the data
+#     data = df.iloc[:, 1:].values
+#     labels = df['Disease'].values
+
+#     # Train the machine learning model
+#     clf_rf = RandomForestClassifier(n_estimators=100, max_depth=15, min_samples_leaf=1)
+#     clf_rf.fit(data, labels)
+
+#     return clf_rf, encoder
